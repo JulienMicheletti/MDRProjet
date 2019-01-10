@@ -36,7 +36,34 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
     } 
 } 
 
-std::vector<vector<std::string> > readfile(string filename){
+vector<int> readLine(string filename) {
+	ifstream fichier(filename.c_str(), ios::in);
+	//std::vector<std::vector<std::string> > tab;
+	std::vector<int> tab;
+	if (fichier) {
+		string line;
+		string esp;
+		string token;
+		while (getline(fichier, line)) {
+			if (line[0] == 'f') {
+				std::istringstream iss(line);
+				while (getline(iss, esp, ' ')) {
+					if (esp[0] != 'f') {
+						std::istringstream iss2(esp);
+						getline(iss2, token, '/');
+						tab.push_back(-1 + atoi((token).c_str()));
+					}
+				}
+			}
+		}
+	fichier.close();
+	} else {
+		cerr << "Impossible d'ouvrir le fichier !" << endl;
+	}
+	return tab;
+}
+
+std::vector<vector<std::string> > readPoint(string filename){
   ifstream fichier(filename.c_str(), ios::in);
   std::vector<std::vector<std::string> > tab;
   std::vector<std::string> tmp;
@@ -46,12 +73,11 @@ std::vector<vector<std::string> > readfile(string filename){
      std::istringstream iss(line);
       std::string token;
       while(std::getline(iss, token, ' ')){
-	
        	tmp.push_back(token);
       }
       if (line[0] == 'v'){
-	tab.push_back(tmp);
-	tmp.clear();
+		tab.push_back(tmp);
+		tmp.clear();
       }
     }
     fichier.close();
@@ -74,9 +100,18 @@ void afficher(std::vector<vector<std::string> > tab){
  image.write_tga_file("output.tga");
 }
 
+void relier(vector<int> lignes, vector<vector<string> > points) {
+	for (int i = 0; i < lignes.size(); i++) {
+
+	}
+}
+
 
 int main(int ac, char **av){
   string filename = "african_head.txt";
-  afficher(readfile(filename));
+  afficher(readPoint(filename));
+  readLine(filename);
+  
+
  return 0;
 }
