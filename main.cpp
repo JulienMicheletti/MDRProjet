@@ -38,7 +38,6 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
 
 vector<int> readLine(string filename) {
 	ifstream fichier(filename.c_str(), ios::in);
-	//std::vector<std::vector<std::string> > tab;
 	std::vector<int> tab;
 	if (fichier) {
 		string line;
@@ -87,30 +86,36 @@ std::vector<vector<std::string> > readPoint(string filename){
   return tab;
 }
 
-void afficher(std::vector<vector<std::string> > tab){
-  int x = 0;
-  int y = 0;
+void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
+  int x0, x1, y0, y1 = 0;
+  int id = 1;
   TGAImage image(500, 500, TGAImage::RGB);
-    for (int i = 0; i < tab.size(); i++){
-	if (tab[i][0] == "v"){
-	  image.set(strtof(tab[i][1].c_str(), 0)*250+250 ,strtof(tab[i][2].c_str(), 0)*250+250, white);
-	}
-      }
- image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
+  for (int i = 0; i < lignes.size(); i++) {
+	  if (id == 1 || id == 2) {
+		  x0 = strtof(points[lignes[i]][1].c_str(), 0) * 250 + 250;
+		  y0 = strtof(points[lignes[i]][2].c_str(), 0) * 250 + 250;
+		  x1 = strtof(points[lignes[i+1]][1].c_str(), 0) * 250 + 250;
+		  y1 = strtof(points[lignes[i+1]][2].c_str(), 0) * 250 + 250;
+		  id++;
+	  }
+	  else if (id == 3) {
+		  x0 = strtof(points[lignes[i]][1].c_str(), 0) * 250 + 250;
+		  y0 = strtof(points[lignes[i]][2].c_str(), 0) * 250 + 250;
+		  x1 = strtof(points[lignes[i - 2]][1].c_str(), 0) * 250 + 250;
+		  y1 = strtof(points[lignes[i - 2]][2].c_str(), 0) * 250 + 250;
+		  id = 1;
+	  }
+	  line(x0, y0, x1, y1, image, white);
+  }
+ image.flip_vertically();
  image.write_tga_file("output.tga");
 }
 
-void relier(vector<int> lignes, vector<vector<string> > points) {
-	for (int i = 0; i < lignes.size(); i++) {
-
-	}
-}
 
 
 int main(int ac, char **av){
   string filename = "african_head.txt";
-  afficher(readPoint(filename));
-  readLine(filename);
+  afficher(readPoint(filename), readLine(filename));
   
 
  return 0;
