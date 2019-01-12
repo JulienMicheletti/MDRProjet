@@ -111,12 +111,21 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
  image.write_tga_file("output.tga");
 }
 
+void triangle(int x0, int y0, int x1, int y1, int x2, int y2) {
+	TGAImage image(500, 500, TGAImage::RGB);
+	line(x0, y0, x1, y1, image, white);
+	line(x1, y1, x2, y2, image, white);
+	line(x2, y2, x0, y0, image, white);
+	image.flip_vertically();
+	image.write_tga_file("output.tga");
+}
+
 
 
 int main(int ac, char **av){
   string filename = "african_head.txt";
-  afficher(readPoint(filename), readLine(filename));
-  
+  //afficher(readPoint(filename), readLine(filename));
+  triangle(100, 100, 300, 300, 100, 300);
 
  return 0;
 }
