@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Julien/CLionProjects/MDRProjet/main.cpp
+main.h
+C:/Users/Julien/CLionProjects/MDRProjet/main.h
+tgaimage.h
+C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.h
+
+C:/Users/Julien/CLionProjects/MDRProjet/main.h
+iostream
+-
+fstream
+-
+cmath
+-
+cstdlib
+-
+string
+-
+vector
+-
+sstream
+-
+
+C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.h
+fstream
+-
+
