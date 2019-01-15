@@ -13,29 +13,38 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\tgaimage">
+      <UniqueIdentifier>{cf46152a-7baa-4d07-bc0e-d24e8559d5ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\ressources">
+      <UniqueIdentifier>{64ea3d55-241a-43ae-b7ad-22117c975ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\main">
+      <UniqueIdentifier>{d9c2fe65-a433-41dd-bdec-caab7df10710}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="tgaimage.h">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\tgaimage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="tgaimage.cpp">
+      <Filter>Fichiers sources\tgaimage</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\main</Filter>
     </ClCompile>
-    <ClCompile Include="tgaimage.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="pch.cpp">
+      <Filter>Fichiers sources\main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="african_head.txt">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\ressources</Filter>
     </Text>
   </ItemGroup>
 </Project>

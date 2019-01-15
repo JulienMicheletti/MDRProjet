@@ -30,7 +30,7 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
         } 
         error2 += derror2; 
         if (error2 > dx) { 
-            y += (y1>y0?1:-1); 
+			y += (y1 > y0 ? 1 : -1);
             error2 -= dx*2; 
         } 
     } 
@@ -113,9 +113,28 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
 
 void triangle(int x0, int y0, int x1, int y1, int x2, int y2) {
 	TGAImage image(500, 500, TGAImage::RGB);
+	int idX = x0;
+	int idY = y0;
+	bool cont = true;
+	bool cont2 = true;
 	line(x0, y0, x1, y1, image, white);
 	line(x1, y1, x2, y2, image, white);
 	line(x2, y2, x0, y0, image, white);
+	while (cont && cont2) {
+		if (x0 == x1 && y0 == y1) {
+			cont = false;
+		} else {
+			x0 += (x0 < x1 ? 1 : 0);
+			y0 += (y0 < y1 ? 1 : 0);
+		}
+		if (idX == x2 && idY == y2) {
+			cont2 = false;
+		} else {
+			idX += (idX < x2 ? 1 : 0);
+			idY += (idY < y2 ? 1 : 0);
+		}
+		line(x0, y0, idX, idY, image, red);
+	}
 	image.flip_vertically();
 	image.write_tga_file("output.tga");
 }
