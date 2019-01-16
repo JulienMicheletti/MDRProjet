@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MDRProjet.dir/src/main.cpp.obj"
   "CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.obj"
+  "CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.obj"
   "MDRProjet.pdb"
   "MDRProjet.exe"
   "MDRProjet.exe.manifest"
