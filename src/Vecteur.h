@@ -4,6 +4,7 @@
 
 #ifndef MDRPROJET_VECTEUR_H
 #define MDRPROJET_VECTEUR_H
+
 class Vecteur {
 public:
     float x;

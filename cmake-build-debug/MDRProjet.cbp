@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/Dessin.cpp">
+			<Option target="MDRProjet"/>
+		</Unit>
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/Dessin.h">
+			<Option target="MDRProjet"/>
+		</Unit>
 		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/Vecteur.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>

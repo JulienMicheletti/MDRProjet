@@ -124,6 +124,33 @@ MDRProjet\fast:
 	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\build
 .PHONY : MDRProjet\fast
 
+src\Dessin.obj: src\Dessin.cpp.obj
+
+.PHONY : src\Dessin.obj
+
+# target to build an object file
+src\Dessin.cpp.obj:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj
+.PHONY : src\Dessin.cpp.obj
+
+src\Dessin.i: src\Dessin.cpp.i
+
+.PHONY : src\Dessin.i
+
+# target to preprocess a source file
+src\Dessin.cpp.i:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\Dessin.cpp.i
+.PHONY : src\Dessin.cpp.i
+
+src\Dessin.s: src\Dessin.cpp.s
+
+.PHONY : src\Dessin.s
+
+# target to generate assembly for a file
+src\Dessin.cpp.s:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\Dessin.cpp.s
+.PHONY : src\Dessin.cpp.s
+
 src\Vecteur.obj: src\Vecteur.cpp.obj
 
 .PHONY : src\Vecteur.obj
@@ -214,6 +241,9 @@ help:
 	@echo ... edit_cache
 	@echo ... MDRProjet
 	@echo ... rebuild_cache
+	@echo ... src/Dessin.obj
+	@echo ... src/Dessin.i
+	@echo ... src/Dessin.s
 	@echo ... src/Vecteur.obj
 	@echo ... src/Vecteur.i
 	@echo ... src/Vecteur.s

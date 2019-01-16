@@ -5,21 +5,9 @@
 
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red   = TGAColor(255, 0,   0,   255);
+const int width = 500;
+const int heigth = 500;
 using namespace std;
-
-struct point
-{
-    int x;
-    int y;
-    int z;
-};
-
-struct pointf
-{
-    float x;
-    float y;
-    float z;
-};
 
 void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
     bool steep = false;
@@ -101,31 +89,35 @@ std::vector<vector<std::string> > readPoint(string filename){
     return tab;
 }
 
-bool intpoint_inside_trigon(point s, point a, point b, point c)
+bool isInTriangle(pointf p, pointf p0, pointf p1, pointf p2)
 {
-    int as_x = s.x-a.x;
-    int as_y = s.y-a.y;
+    float condition1 = (p.x - p1.x) * (p0.y - p1.y) - (p0.x - p1.x) * (p.y - p1.y);
+    float condition2 = (p.x - p2.x) * (p1.y - p2.y) - (p1.x - p2.x) * (p.y - p2.y);
+    float condition3 = (p.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p.y - p0.y);
+    bool negatif = false;
+    bool positif = false;
 
-    bool s_ab = (b.x-a.x)*as_y-(b.y-a.y)*as_x > 0;
+    if (condition1 < 0 || condition2 < 0 || condition3 < 0){
+        negatif = true;
+    }
+    if (condition1 > 0 || condition2 > 0 || condition3 > 0){
+        positif = true;
+    }
 
-    if((c.x-a.x)*as_y-(c.y-a.y)*as_x > 0 == s_ab) return false;
-
-    if((c.x-b.x)*(s.y-b.y)-(c.y-b.y)*(s.x-b.x) > 0 != s_ab) return false;
-
-    return true;
+    return !(negatif && positif);
 }
 
-void settriangle(point pt1, point pt2, point pt3, TGAImage &image,  TGAColor color) {
+void settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color) {
     line(pt1.x, pt1.y, pt2.x, pt2.y, image, color);
     line(pt2.x, pt2.y, pt3.x, pt3.y, image, color);
     line(pt1.x, pt1.y, pt3.x, pt3.y, image, color);
-    point newPt;
+    pointf newPt;
 
-    for (int i = 0; i < 500; i++){
-        for (int j = 0; j < 500; j++){
+    for (int i = 0; i < width; i++){
+        for (int j = 0; j < heigth; j++){
             newPt.x = i;
             newPt.y = j;
-            if (intpoint_inside_trigon(newPt, pt1, pt2, pt3)){
+            if (isInTriangle(newPt, pt1, pt2, pt3)){
                 image.set(i, j, color);
             }
         }
@@ -145,46 +137,27 @@ float intensite(vector<pointf> world) {
 }
 
 void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAImage &image) {
-    vector<point> screen;
+    vector<pointf> screen;
     vector<pointf> world;
-    float inte = 1;
-    point p0, p1, p2;
-    pointf p3, p4, p5;
-    int id = 1;
-    for (int i = 0; i < lignes.size(); i++) {
-        if (id == 1 || id == 2) {
-            id++;
-        } else if (id == 3) {
-            p0.x = strtof(points[lignes[i]][1].c_str(), 0) * 250 + 250;
-            p0.y = strtof(points[lignes[i]][2].c_str(), 0) * 250 + 250;
-            p1.x = strtof(points[lignes[i - 2]][1].c_str(), 0) * 250 + 250;
-            p1.y = strtof(points[lignes[i - 2]][2].c_str(), 0) * 250 + 250;
-            p2.x = strtof(points[lignes[i - 1]][1].c_str(), 0) * 250 + 250;
-            p2.y = strtof(points[lignes[i - 1]][2].c_str(), 0) * 250 + 250;
-            p3.x = strtof(points[lignes[i]][1].c_str(), 0);
-            p3.y = strtof(points[lignes[i]][2].c_str(), 0);
-            p3.z = strtof(points[lignes[i]][3].c_str(), 0);
-            p4.x = strtof(points[lignes[i - 2]][1].c_str(), 0);
-            p4.y = strtof(points[lignes[i - 2]][2].c_str(), 0);
-            p4.z = strtof(points[lignes[i - 2]][3].c_str(), 0);
-            p5.x = strtof(points[lignes[i - 1]][1].c_str(), 0);
-            p5.y = strtof(points[lignes[i - 1]][2].c_str(), 0);
-            p5.z = strtof(points[lignes[i - 1]][3].c_str(), 0);
-            id = 1;
-            screen.push_back(p0);
-            screen.push_back(p1);
-            screen.push_back(p2);
-            world.push_back(p3);
-            world.push_back(p4);
-            world.push_back(p5);
-
-            inte = intensite(world);
-            if (inte > 0) {
-                settriangle(p0, p1, p2, image, TGAColor(inte * 255, inte * 255, inte * 255, 255));
-            }
-            screen.clear();
-            world.clear();
+    pointf p;
+    pointf pf;
+    float inte;
+    for (int i = 2; i < lignes.size(); i+=3) {
+        for (int j = 2; j >= 0; j--) {
+            p.x = strtof(points[lignes[i-j]][1].c_str(), 0) * 250 + 250;
+            p.y = strtof(points[lignes[i-j]][2].c_str(), 0) * 250 + 250;
+            pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
+            pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
+            pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
+            screen.push_back(p);
+            world.push_back(pf);
         }
+        inte = intensite(world);
+        if (inte > 0) {
+            settriangle(screen[0], screen[1], screen[2], image, TGAColor(inte * 255, inte * 255, inte * 255, 255));
+        }
+        screen.clear();
+        world.clear();
     }
     }
 
@@ -192,7 +165,6 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
         TGAImage image(500, 500, TGAImage::RGB);
         string filename = "C:\\Users\\Julien\\CLionProjects\\MDRProjet\\african_head.txt";
         afficher(readPoint(filename), readLine(filename), image);
-        //settriangle(100, 100, 300, 200, 50, 100, image, TGAColor(rand()%255, rand()%255, rand()%255, 255));
         image.flip_vertically();
         image.write_tga_file("output.tga");
 
