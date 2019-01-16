@@ -91,20 +91,19 @@ std::vector<vector<std::string> > readPoint(string filename){
     }
     return tab;
 }
-float Sign(point p1, point p2, point p3)
+
+bool intpoint_inside_trigon(point s, point a, point b, point c)
 {
-    return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-}
+    int as_x = s.x-a.x;
+    int as_y = s.y-a.y;
 
-bool IsPointInTri(point pt, point v1, point v2, point v3)
-{
-    bool b1, b2, b3;
+    bool s_ab = (b.x-a.x)*as_y-(b.y-a.y)*as_x > 0;
 
-    b1 = Sign(pt, v1, v2) < 0.0f;
-    b2 = Sign(pt, v2, v3) < 0.0f;
-    b3 = Sign(pt, v3, v1) < 0.0f;
+    if((c.x-a.x)*as_y-(c.y-a.y)*as_x > 0 == s_ab) return false;
 
-    return ((b1 == b2) && (b2 == b3));
+    if((c.x-b.x)*(s.y-b.y)-(c.y-b.y)*(s.x-b.x) > 0 != s_ab) return false;
+
+    return true;
 }
 
 void settriangle(int x0, int y0, int x1, int y1, int x2, int y2, TGAImage &image,  TGAColor color) {
@@ -120,16 +119,17 @@ void settriangle(int x0, int y0, int x1, int y1, int x2, int y2, TGAImage &image
     pt3.x = x2;
     pt3.y = y2;
 
- for (int i = 0; i < image.get_width(); i++){
-        for (int j = 0; j < image.get_height(); j++){
+    for (int i = 0; i < 500; i++){
+        for (int j = 0; j < 500; j++){
             newPt.x = i;
             newPt.y = j;
-            if (IsPointInTri(newPt, pt1, pt2, pt3)){
+            if (intpoint_inside_trigon(newPt, pt1, pt2, pt3)){
                 image.set(i, j, color);
             }
         }
     }
 }
+
 
 void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAImage &image){
     int x0, x1, y0, y1, x2, y2 = 0;
