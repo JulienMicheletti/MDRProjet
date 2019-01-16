@@ -6,6 +6,12 @@ const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red   = TGAColor(255, 0,   0,   255);
 using namespace std;
 
+struct point
+{
+    float x;
+    float y;
+};
+
 void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
     bool steep = false;
     if (std::abs(x0-x1)<std::abs(y0-y1)) {
@@ -85,13 +91,60 @@ std::vector<vector<std::string> > readPoint(string filename){
     }
     return tab;
 }
+float Sign(point p1, point p2, point p3)
+{
+    return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
+
+bool IsPointInTri(point pt, point v1, point v2, point v3)
+{
+    bool b1, b2, b3;
+
+    b1 = Sign(pt, v1, v2) < 0.0f;
+    b2 = Sign(pt, v2, v3) < 0.0f;
+    b3 = Sign(pt, v3, v1) < 0.0f;
+
+    return ((b1 == b2) && (b2 == b3));
+}
+
+void settriangle(int x0, int y0, int x1, int y1, int x2, int y2) {
+    TGAImage image(500, 500, TGAImage::RGB);
+    line(x0, y0, x1, y1, image, white);
+    line(x1, y1, x2, y2, image, white);
+    line(x2, y2, x0, y0, image, white);
+
+    point pt1, pt2, pt3;
+    pt1.x = x0;
+    pt1.y = y0;
+    pt2.x = x1;
+    pt2.y = y1;
+    pt3.x = x2;
+    pt3.y = y2;
+
+    for (int i = 0; i < 500; i++){
+        for (int j = 0; j < 500; j++){
+            point newPt;
+            newPt.x = i;
+            newPt.y = j;
+            if (IsPointInTri(newPt, pt1, pt2, pt3)){
+                image.set(i, j, red);
+            }
+        }
+    }
+    image.flip_vertically();
+    image.write_tga_file("output.tga");
+}
 
 void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
+    point p1;
+    point p2;
+    point p3;
     int x0, x1, y0, y1 = 0;
     int id = 1;
     TGAImage image(500, 500, TGAImage::RGB);
     for (int i = 0; i < lignes.size(); i++) {
         if (id == 1 || id == 2) {
+            //  p1.x =
             x0 = strtof(points[lignes[i]][1].c_str(), 0) * 250 + 250;
             y0 = strtof(points[lignes[i]][2].c_str(), 0) * 250 + 250;
             x1 = strtof(points[lignes[i+1]][1].c_str(), 0) * 250 + 250;
@@ -104,6 +157,7 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
             x1 = strtof(points[lignes[i - 2]][1].c_str(), 0) * 250 + 250;
             y1 = strtof(points[lignes[i - 2]][2].c_str(), 0) * 250 + 250;
             id = 1;
+            // settriangle(strtof(points[lignes[i-2]].c_str(), 0), strtof(points[lignes[i-1]]), strtof(points[lignes[i]]));
         }
         line(x0, y0, x1, y1, image, white);
     }
@@ -111,40 +165,12 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes){
     image.write_tga_file("output.tga");
 }
 
-void triangle(int x0, int y0, int x1, int y1, int x2, int y2) {
-    TGAImage image(500, 500, TGAImage::RGB);
-    int idX = x0;
-    int idY = y0;
-    bool cont = true;
-    bool cont2 = true;
-    line(x0, y0, x1, y1, image, white);
-    line(x1, y1, x2, y2, image, white);
-    line(x2, y2, x0, y0, image, white);
-    while (cont && cont2) {
-        if (x0 == x1 && y0 == y1) {
-            cont = false;
-        } else {
-            x0 += (x0 < x1 ? 1 : 0);
-            y0 += (y0 < y1 ? 1 : 0);
-        }
-        if (idX == x2 && idY == y2) {
-            cont2 = false;
-        } else {
-            idX += (idX < x2 ? 1 : 0);
-            idY += (idY < y2 ? 1 : 0);
-        }
-        line(x0, y0, idX, idY, image, red);
-    }
-    image.flip_vertically();
-    image.write_tga_file("output.tga");
-}
-
-
 
 int main(int ac, char **av){
     string filename = "C:\\Users\\Julien\\CLionProjects\\MDRProjet\\african_head.txt";
-    afficher(readPoint(filename), readLine(filename));
-    //triangle(100, 100, 300, 300, 100, 300);
+    //afficher(readPoint(filename), readLine(filename));
+    settriangle(100, 100, 500, 500, 100, 300);
+
 
     return 0;
 }

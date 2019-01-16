@@ -49,10 +49,10 @@ RM = "C:\Program Files\JetBrains\CLion 2018.3.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Julien\CLionProjects\MDRProjet
+CMAKE_SOURCE_DIR = C:\Users\Julien\CLionProjects\MProjet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -81,9 +81,9 @@ rebuild_cache\fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\CMakeFiles C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\CMakeFiles C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -124,59 +124,59 @@ MDRProjet\fast:
 	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\build
 .PHONY : MDRProjet\fast
 
-main.obj: main.cpp.obj
+src\main.obj: src\main.cpp.obj
 
-.PHONY : main.obj
-
-# target to build an object file
-main.cpp.obj:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\main.cpp.obj
-.PHONY : main.cpp.obj
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\main.cpp.s
-.PHONY : main.cpp.s
-
-tgaimage.obj: tgaimage.cpp.obj
-
-.PHONY : tgaimage.obj
+.PHONY : src\main.obj
 
 # target to build an object file
-tgaimage.cpp.obj:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\tgaimage.cpp.obj
-.PHONY : tgaimage.cpp.obj
+src\main.cpp.obj:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\main.cpp.obj
+.PHONY : src\main.cpp.obj
 
-tgaimage.i: tgaimage.cpp.i
+src\main.i: src\main.cpp.i
 
-.PHONY : tgaimage.i
+.PHONY : src\main.i
 
 # target to preprocess a source file
-tgaimage.cpp.i:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\tgaimage.cpp.i
-.PHONY : tgaimage.cpp.i
+src\main.cpp.i:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\main.cpp.i
+.PHONY : src\main.cpp.i
 
-tgaimage.s: tgaimage.cpp.s
+src\main.s: src\main.cpp.s
 
-.PHONY : tgaimage.s
+.PHONY : src\main.s
 
 # target to generate assembly for a file
-tgaimage.cpp.s:
-	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\tgaimage.cpp.s
-.PHONY : tgaimage.cpp.s
+src\main.cpp.s:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\main.cpp.s
+.PHONY : src\main.cpp.s
+
+src\tgaimage.obj: src\tgaimage.cpp.obj
+
+.PHONY : src\tgaimage.obj
+
+# target to build an object file
+src\tgaimage.cpp.obj:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\tgaimage.cpp.obj
+.PHONY : src\tgaimage.cpp.obj
+
+src\tgaimage.i: src\tgaimage.cpp.i
+
+.PHONY : src\tgaimage.i
+
+# target to preprocess a source file
+src\tgaimage.cpp.i:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\tgaimage.cpp.i
+.PHONY : src\tgaimage.cpp.i
+
+src\tgaimage.s: src\tgaimage.cpp.s
+
+.PHONY : src\tgaimage.s
+
+# target to generate assembly for a file
+src\tgaimage.cpp.s:
+	$(MAKE) -f CMakeFiles\MDRProjet.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\MDRProjet.dir\src\tgaimage.cpp.s
+.PHONY : src\tgaimage.cpp.s
 
 # Help Target
 help:
@@ -187,12 +187,12 @@ help:
 	@echo ... edit_cache
 	@echo ... MDRProjet
 	@echo ... rebuild_cache
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
-	@echo ... tgaimage.obj
-	@echo ... tgaimage.i
-	@echo ... tgaimage.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
+	@echo ... src/tgaimage.obj
+	@echo ... src/tgaimage.i
+	@echo ... src/tgaimage.s
 .PHONY : help
 
 

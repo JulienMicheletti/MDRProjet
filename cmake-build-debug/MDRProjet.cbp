@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="MDRProjet">
-				<Option output="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug"/>
+				<Option output="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
@@ -42,15 +42,15 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 MDRProjet"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 MDRProjet"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="MDRProjet/fast">
-				<Option output="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug"/>
+				<Option output="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="msvc8"/>
@@ -63,36 +63,36 @@
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 MDRProjet/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 MDRProjet/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MDRProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\Julien\CLionProjects\MProjet\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Julien/CLionProjects/MDRProjet/main.cpp">
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/main.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MDRProjet/main.h">
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/main.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.cpp">
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.h">
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MDRProjet/CMakeLists.txt">
+		<Unit filename="C:/Users/Julien/CLionProjects/MProjet/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

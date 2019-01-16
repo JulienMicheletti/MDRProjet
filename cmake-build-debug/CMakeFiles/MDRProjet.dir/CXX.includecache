@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Julien/CLionProjects/MDRProjet/main.cpp
+C:/Users/Julien/CLionProjects/MProjet/src/main.cpp
 main.h
-C:/Users/Julien/CLionProjects/MDRProjet/main.h
+C:/Users/Julien/CLionProjects/MProjet/src/main.h
 tgaimage.h
-C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.h
+C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
 
-C:/Users/Julien/CLionProjects/MDRProjet/main.h
+C:/Users/Julien/CLionProjects/MProjet/src/main.h
 iostream
 -
 fstream
@@ -28,7 +28,21 @@ vector
 sstream
 -
 
-C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.h
+C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.cpp
+iostream
+-
+fstream
+-
+string.h
+-
+time.h
+-
+math.h
+-
+tgaimage.h
+C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
+
+C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
 fstream
 -
 

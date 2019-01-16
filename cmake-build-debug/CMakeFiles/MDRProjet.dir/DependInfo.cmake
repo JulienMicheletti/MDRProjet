@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Julien/CLionProjects/MDRProjet/main.cpp" "C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug/CMakeFiles/MDRProjet.dir/main.cpp.obj"
-  "C:/Users/Julien/CLionProjects/MDRProjet/tgaimage.cpp" "C:/Users/Julien/CLionProjects/MDRProjet/cmake-build-debug/CMakeFiles/MDRProjet.dir/tgaimage.cpp.obj"
+  "C:/Users/Julien/CLionProjects/MProjet/src/main.cpp" "C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles/MDRProjet.dir/src/main.cpp.obj"
+  "C:/Users/Julien/CLionProjects/MProjet/src/tgaimage.cpp" "C:/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
