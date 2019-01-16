@@ -13,19 +13,16 @@
 #include <vector>
 #include <sstream>
 
-struct point
-{
-    int x;
-    int y;
-    int z;
-};
+#include "tgaimage.h"
+#include "Vecteur.h"
+#include "Dessin.h"
 
-struct pointf
-{
-    float x;
-    float y;
-    float z;
-};
+const TGAColor white = TGAColor(255, 255, 255, 255);
+const TGAColor red   = TGAColor(255, 0,   0,   255);
+const int width = 500;
+const int heigth = 500;
+using namespace std;
+
 
 
 #endif //PROJET_MAIN_H

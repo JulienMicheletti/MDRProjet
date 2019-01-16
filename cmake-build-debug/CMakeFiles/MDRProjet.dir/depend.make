@@ -3,10 +3,14 @@
 
 CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj: ..\src\Dessin.cpp
 CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj: ..\src\Dessin.h
+CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj: ..\src\Vecteur.h
+CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj: ..\src\main.h
+CMakeFiles\MDRProjet.dir\src\Dessin.cpp.obj: ..\src\tgaimage.h
 
 CMakeFiles\MDRProjet.dir\src\Vecteur.cpp.obj: ..\src\Vecteur.cpp
 CMakeFiles\MDRProjet.dir\src\Vecteur.cpp.obj: ..\src\Vecteur.h
 
+CMakeFiles\MDRProjet.dir\src\main.cpp.obj: ..\src\Dessin.h
 CMakeFiles\MDRProjet.dir\src\main.cpp.obj: ..\src\Vecteur.h
 CMakeFiles\MDRProjet.dir\src\main.cpp.obj: ..\src\main.cpp
 CMakeFiles\MDRProjet.dir\src\main.cpp.obj: ..\src\main.h
