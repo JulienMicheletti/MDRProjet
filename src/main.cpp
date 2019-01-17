@@ -53,12 +53,12 @@ std::vector<vector<std::string> > readPoint(string filename){
 float intensite(vector<pointf> world) {
     Vecteur vecteur1(world[1].x - world[0].x, world[1].y - world[0].y, world[1].z - world[0].z);
     Vecteur vecteur2(world[2].x - world[0].x, world[2].y - world[0].y, world[2].z - world[0].z);
-    Vecteur light(0, 0, 50);
+    Vecteur light(0, 0, 1);
     Vecteur normal;
     normal = vecteur1.normal(vecteur2);
-    normal.normalize();
-
-    return normal.produitScal(light);
+    float norme = sqrtf( Vecteur(normal.x,normal.y,normal.z).produitScal(Vecteur(normal.x,normal.y, normal.z)));
+    Vecteur normalize = normal.div(norme);
+    return normalize.produitScal(light);
 
 }
 
