@@ -73,6 +73,7 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
         for (int j = 2; j >= 0; j--) {
             p.x = strtof(points[lignes[i-j]][1].c_str(), 0) * 250 + 250;
             p.y = strtof(points[lignes[i-j]][2].c_str(), 0) * 250 + 250;
+            p.z = strtof(points[lignes[i-j]][3].c_str(), 0) * 250 + 250;
             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
