@@ -23,7 +23,7 @@ public:
 
     void settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, TGAColor color);
 
-    bool isInTriangle(pointf p, pointf p0, pointf p1, pointf p2);
+    bool isInTriangle(Vecteur vecteur);
 };
 
 

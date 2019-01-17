@@ -37,18 +37,25 @@ void Dessin::line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor colo
     }
 }
 
-bool Dessin::isInTriangle(pointf p, pointf p0, pointf p1, pointf p2)
-{
-    float condition1 = (p.x - p1.x) * (p0.y - p1.y) - (p0.x - p1.x) * (p.y - p1.y);
-    float condition2 = (p.x - p2.x) * (p1.y - p2.y) - (p1.x - p2.x) * (p.y - p2.y);
-    float condition3 = (p.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p.y - p0.y);
-    bool negatif = false;
-    bool positif = false;
+Vecteur getTriangleVecteur(pointf p, pointf p0, pointf p1, pointf p2){
+    Vecteur vecteur;
 
-    if (condition1 < 0 || condition2 < 0 || condition3 < 0){
+    vecteur.x = (p.x - p1.x) * (p0.y - p1.y) - (p0.x - p1.x) * (p.y - p1.y);
+    vecteur.y = (p.x - p2.x) * (p1.y - p2.y) - (p1.x - p2.x) * (p.y - p2.y);
+    vecteur.z = (p.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p.y - p0.y);
+
+    return vecteur;
+}
+
+bool Dessin::isInTriangle(Vecteur vecteur)
+{
+   bool negatif = false;
+   bool positif = false;
+
+    if (vecteur.x < 0 || vecteur.y < 0 || vecteur.z < 0){
         negatif = true;
     }
-    if (condition1 > 0 || condition2 > 0 || condition3 > 0){
+    if (vecteur.x > 0 || vecteur.y > 0 || vecteur.z > 0){
         positif = true;
     }
 
@@ -56,17 +63,28 @@ bool Dessin::isInTriangle(pointf p, pointf p0, pointf p1, pointf p2)
 }
 
 void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color) {
+    int *zbuffer = new int[width * heigth];
+    Vecteur v;
+    float z;
     line(pt1.x, pt1.y, pt2.x, pt2.y, image, color);
     line(pt2.x, pt2.y, pt3.x, pt3.y, image, color);
     line(pt1.x, pt1.y, pt3.x, pt3.y, image, color);
     pointf newPt;
 
-    for (int i = 0; i < 500; i++){
-        for (int j = 0; j < 500; j++){
+
+    for (int i = 0; i < width; i++){
+        for (int j = 0; j < heigth; j++){
             newPt.x = i;
             newPt.y = j;
-            if (isInTriangle(newPt, pt1, pt2, pt3)){
-                image.set(i, j, color);
+            v = getTriangleVecteur(newPt, pt1, pt2, pt3);
+            if (isInTriangle(v)){
+                z = 0;
+                z += pt1.z * v.x + pt2.z * v.y + pt3.z * v.z;
+             //   if (zbuffer[int(i + j*width)] < z){
+                    zbuffer[int(i + j*width)] = z;
+                   image.set(i, j, color);
+                //}
+
             }
         }
     }

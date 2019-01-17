@@ -56,9 +56,9 @@ float intensite(vector<pointf> world) {
     Vecteur light(0, 0, 1);
     Vecteur normal;
     normal = vecteur1.normal(vecteur2);
-    float norme = sqrtf( Vecteur(normal.x,normal.y,normal.z).produitScal(Vecteur(normal.x,normal.y, normal.z)));
-    Vecteur normalize = normal.div(norme);
-    return normalize.produitScal(light);
+    normal = normal.normalize();
+
+    return normal.produitScal(light);
 
 }
 
