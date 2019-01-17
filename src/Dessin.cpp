@@ -62,18 +62,35 @@ bool Dessin::isInTriangle(Vecteur vecteur)
     return !(negatif && positif);
 }
 
+vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
+    vector<pointf> box;
+    pointf min;
+    pointf max;
+    max.x = pt1.x > pt2.x ? (pt1.x > pt3.x ? pt1.x : pt3.x) : (pt2.x > pt3.x ? pt2.x : pt3.x);
+    max.y = pt1.y > pt2.y ? (pt1.y > pt3.y ? pt1.y : pt3.y) : (pt2.y > pt3.y ? pt2.y : pt3.y);
+    min.x = pt1.x < pt2.x ? (pt1.x < pt3.x ? pt1.x : pt3.x) : (pt2.x < pt3.x ? pt2.x : pt3.x);
+    min.y = pt1.y < pt2.y ? (pt1.y < pt3.y ? pt1.y : pt3.y) : (pt2.y < pt3.y ? pt2.y : pt3.y);
+
+    box.push_back(max);
+    box.push_back(min);
+    return box;
+
+
+}
+
 void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color) {
     int *zbuffer = new int[width * heigth];
+    vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
     float z;
     line(pt1.x, pt1.y, pt2.x, pt2.y, image, color);
     line(pt2.x, pt2.y, pt3.x, pt3.y, image, color);
     line(pt1.x, pt1.y, pt3.x, pt3.y, image, color);
     pointf newPt;
+    
+    for (int i = box[1].x; i < box[0].x; i++){
+        for (int j = box[1].y; j < box[0].y; j++){
 
-
-    for (int i = 0; i < width; i++){
-        for (int j = 0; j < heigth; j++){
             newPt.x = i;
             newPt.y = j;
             v = getTriangleVecteur(newPt, pt1, pt2, pt3);
@@ -82,7 +99,9 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  T
                 z += pt1.z * v.x + pt2.z * v.y + pt3.z * v.z;
              //   if (zbuffer[int(i + j*width)] < z){
                     zbuffer[int(i + j*width)] = z;
-                   image.set(i, j, color);
+
+                image.set(i, j, color);
+                  //image.set(i, j, color);
                 //}
 
             }

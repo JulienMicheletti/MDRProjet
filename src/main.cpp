@@ -91,7 +91,7 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
     int main(int ac, char **av) {
         TGAImage image(500, 500, TGAImage::RGB);
         string filename = "C:\\Users\\Julien\\CLionProjects\\MDRProjet\\african_head.txt";
-        afficher(readPoint(filename), readLine(filename), image);
+       afficher(readPoint(filename), readLine(filename), image);
         image.flip_vertically();
         image.write_tga_file("output.tga");
 
