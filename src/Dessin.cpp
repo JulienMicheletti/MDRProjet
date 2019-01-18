@@ -42,7 +42,9 @@ Vecteur barycentrique(pointf p, pointf p0, pointf p1, pointf p2){
     Vecteur vecteur2(p2.y - p0.y, p1.y - p0.y, p0.y - p.y);
 
     Vecteur mult = vecteur.normal(vecteur2);
-    if (std::abs(mult.z)<1) return Vecteur(-1,1,1);
+    if (abs(mult.z)<1) {
+        return Vecteur(-1, 1, 1);
+    }
     return Vecteur(1.f-(mult.x+mult.y)/mult.z, mult.y/mult.z, mult.x/mult.z);
 
 }
@@ -63,17 +65,6 @@ bool Dessin::isInTriangle(Vecteur vecteur)
         return false;
     }
     return true;
-  /* bool negatif = false;
-   bool positif = false;
-
-    if (vecteur.x < 0 || vecteur.y < 0 || vecteur.z < 0){
-        negatif = true;
-    }
-    if (vecteur.x > 0 || vecteur.y > 0 || vecteur.z > 0){
-        positif = true;
-    }
-
-    return !(negatif && positif);*/
 }
 
 vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
@@ -92,30 +83,23 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 
 }
 
-void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color) {
-    float *zbuffer = new float[width*heigth];
-   // *zbuffer = 0;
+void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color, float *zbuffer) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
     float z;
-    line(pt1.x, pt1.y, pt2.x, pt2.y, image, color);
-    line(pt2.x, pt2.y, pt3.x, pt3.y, image, color);
-    line(pt1.x, pt1.y, pt3.x, pt3.y, image, color);
     pointf newPt;
 
     for (int i = box[1].x; i < box[0].x; i++){
-        for (int j = box[1].y; j < box[0].y; j++){
+        for (int j = box[1].y; j < box[0].y; j++) {
             newPt.x = i;
             newPt.y = j;
-            v = barycentrique(newPt, pt1, pt2, pt3);
-            if (isInTriangle(v)){
-                z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z;
-               if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
-                   zbuffer[int(newPt.x + newPt.y * width)] = z;
-                   cout << zbuffer[int(newPt.x + newPt.y * width)] << endl;
-                   image.set(i, j, color);
-                }
-
+            v = getTriangleVecteur(newPt, pt1, pt2, pt3);
+            if (isInTriangle(v)) {
+                z = pt1.z;
+                if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
+                    zbuffer[int(newPt.x + newPt.y * width)] = z;
+                    image.set(newPt.x, newPt.y, color);
+              }
             }
         }
     }

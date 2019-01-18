@@ -69,6 +69,7 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
     pointf p;
     pointf pf;
     float inte;
+    float *zbuffer = new float[width*heigth];
     for (int i = 2; i < lignes.size(); i+=3) {
         for (int j = 2; j >= 0; j--) {
             p.x = strtof(points[lignes[i-j]][1].c_str(), 0) * 250 + 250;
@@ -82,11 +83,11 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
         }
         inte = intensite(world);
         if (inte > 0) {
-            dessin.settriangle(screen[0], screen[1], screen[2], image, TGAColor(inte * 255, inte * 255, inte * 255, 255));
+            dessin.settriangle(screen[0], screen[1], screen[2], image, TGAColor(inte * 255, inte * 255, inte * 255, 255), zbuffer);
         }
         screen.clear();
         world.clear();
-    }
+        }
     }
 
     int main(int ac, char **av) {
@@ -94,7 +95,7 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
         string filename = "C:\\Users\\Julien\\CLionProjects\\MDRProjet\\african_head.txt";
        afficher(readPoint(filename), readLine(filename), image);
         image.flip_vertically();
-        image.write_tga_file("output.tga");
+        image.write_tga_file("output3.tga");
 
         return 0;
     }

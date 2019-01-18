@@ -9,6 +9,7 @@
 #include "tgaimage.h"
 #include "main.h"
 
+
 struct pointf {
     float x;
     float y;
@@ -21,7 +22,7 @@ public:
 
     void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color);
 
-    void settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, TGAColor color);
+    void settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, TGAColor color, float *zbuffer);
 
     bool isInTriangle(Vecteur vecteur);
 };
