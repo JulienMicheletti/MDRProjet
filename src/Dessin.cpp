@@ -37,26 +37,17 @@ void Dessin::line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor colo
     }
 }
 
-Vecteur barycentrique(pointf p, pointf p0, pointf p1, pointf p2){
-    Vecteur vecteur(p2.x - p0.x, p1.x - p0.x, p0.x - p.x);
-    Vecteur vecteur2(p2.y - p0.y, p1.y - p0.y, p0.y - p.y);
+Vecteur barycentrique(pointf p, pointf p1, pointf p2, pointf p3){
+    Vecteur w;
 
-    Vecteur mult = vecteur.normal(vecteur2);
-    if (abs(mult.z)<1) {
-        return Vecteur(-1, 1, 1);
-    }
-    return Vecteur(1.f-(mult.x+mult.y)/mult.z, mult.y/mult.z, mult.x/mult.z);
+    w.x = (p2.y - p3.y)*(p.x - p3.x) + (p3.x - p2.x)*(p.y - p3.y);
+    w.x /= (p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y);
 
-}
+    w.y = (p3.y - p1.y)*(p.x - p3.x) + (p1.x - p3.x) * (p.y - p3.y);
+    w.y /= (p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y);
 
-Vecteur getTriangleVecteur(pointf p, pointf p0, pointf p1, pointf p2){
-    Vecteur vecteur;
-
-    vecteur.x = (p.x - p1.x) * (p0.y - p1.y) - (p0.x - p1.x) * (p.y - p1.y);
-    vecteur.y = (p.x - p2.x) * (p1.y - p2.y) - (p1.x - p2.x) * (p.y - p2.y);
-    vecteur.z = (p.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p.y - p0.y);
-
-    return vecteur;
+    w.z = 1 - w.x - w.y;
+    return w;
 }
 
 bool Dessin::isInTriangle(Vecteur vecteur)
@@ -83,9 +74,19 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 
 }
 
-void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  TGAColor color, float *zbuffer) {
+TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3){
+    float moyenneR = ((float)p1.color.bgra[2] * v.x + (float)p2.color.bgra[2] * v.y + (float)p3.color.bgra[2] * v.z);
+    float moyenneG = ((float)p1.color.bgra[1] * v.x + (float)p2.color.bgra[1] * v.y + (float)p3.color.bgra[1] * v.z);
+    float moyenneB = ((float)p1.color.bgra[0] * v.x + (float)p2.color.bgra[0] * v.y + (float)p3.color.bgra[0] * v.z);
+    TGAColor newColor(moyenneR, moyenneG, moyenneB, 255);
+    return newColor;
+}
+
+
+void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
+    Vecteur col;
     float z;
     pointf newPt;
 
@@ -93,12 +94,13 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image,  T
         for (int j = box[1].y; j < box[0].y; j++) {
             newPt.x = i;
             newPt.y = j;
-            v = getTriangleVecteur(newPt, pt1, pt2, pt3);
+            v = barycentrique(newPt, pt1, pt2, pt3);
             if (isInTriangle(v)) {
-                z = pt1.z;
+                newPt.color = interpolateTriangle(col, pt1, pt2, pt3);
+                z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z ;
                 if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = z;
-                    image.set(newPt.x, newPt.y, color);
+                    image.set(newPt.x, newPt.y, newPt.color);
               }
             }
         }

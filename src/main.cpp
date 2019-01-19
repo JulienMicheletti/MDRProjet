@@ -13,8 +13,10 @@ vector<int> readLine(string filename) {
                 while (getline(iss, esp, ' ')) {
                     if (esp[0] != 'f') {
                         std::istringstream iss2(esp);
-                        getline(iss2, token, '/');
-                        tab.push_back(-1 + atoi((token).c_str()));
+                        for (int i = 0; i < 2; i++) {
+                            getline(iss2, token, '/');
+                            tab.push_back(-1 + atoi((token).c_str()));
+                        }
                     }
                 }
             }
@@ -26,7 +28,7 @@ vector<int> readLine(string filename) {
     return tab;
 }
 
-std::vector<vector<std::string> > readPoint(string filename){
+std::vector<vector<std::string> > readPoint(string filename, bool type){
     ifstream fichier(filename.c_str(), ios::in);
     std::vector<std::vector<std::string> > tab;
     std::vector<std::string> tmp;
@@ -38,10 +40,13 @@ std::vector<vector<std::string> > readPoint(string filename){
             while(std::getline(iss, token, ' ')){
                 tmp.push_back(token);
             }
-            if (line[0] == 'v'){
+            if (line[0] == 'v' && line[1] != 't' && type){
                 tab.push_back(tmp);
-                tmp.clear();
             }
+            if (line[0] == 'v' && line[1] == 't' && !type){
+                tab.push_back(tmp);
+            }
+            tmp.clear();
         }
         fichier.close();
     }else{
@@ -62,28 +67,48 @@ float intensite(vector<pointf> world) {
 
 }
 
-void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAImage &image) {
+TGAColor getTextureImage(pointf texture, TGAImage &image){
+    TGAColor color;
+    color = image.get(texture.x, texture.y);
+   return color;
+}
+
+TGAColor convertirIntensite(pointf pixel, float intensite){
+    TGAColor color = pixel.color;
+    TGAColor newColor((float)color.bgra[2] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[0]*intensite, 255);
+    return newColor;
+}
+
+void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures, TGAImage &image, TGAImage &imagetga) {
     vector<pointf> screen;
     vector<pointf> world;
+    vector<TGAColor> color;
     Dessin dessin;
     pointf p;
     pointf pf;
+    pointf texture;
     float inte;
     float *zbuffer = new float[width*heigth];
-    for (int i = 2; i < lignes.size(); i+=3) {
-        for (int j = 2; j >= 0; j--) {
+    for (int i = 5; i < lignes.size(); i+=6) {
+        for (int j = 5; j >= 0; j-=2) {
             p.x = strtof(points[lignes[i-j]][1].c_str(), 0) * 250 + 250;
             p.y = strtof(points[lignes[i-j]][2].c_str(), 0) * 250 + 250;
             p.z = strtof(points[lignes[i-j]][3].c_str(), 0) * 250 + 250;
             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
+            texture.x =  strtof(textures[lignes[i-j+1]][2].c_str(), 0) * 250 + 250;
+            texture.y =  strtof(textures[lignes[i-j+1]][3].c_str(), 0) * 250 + 250;
+            p.color = getTextureImage(texture, imagetga);
             screen.push_back(p);
             world.push_back(pf);
         }
         inte = intensite(world);
+        for (int w = 0; w < 3; w++){
+            screen[w].color = convertirIntensite(screen[w], inte);
+        }
         if (inte > 0) {
-            dessin.settriangle(screen[0], screen[1], screen[2], image, TGAColor(inte * 255, inte * 255, inte * 255, 255), zbuffer);
+           dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer);
         }
         screen.clear();
         world.clear();
@@ -92,8 +117,11 @@ void afficher(std::vector<vector<std::string> > points, vector<int> lignes, TGAI
 
     int main(int ac, char **av) {
         TGAImage image(500, 500, TGAImage::RGB);
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MDRProjet\\african_head.txt";
-       afficher(readPoint(filename), readLine(filename), image);
+        TGAImage image2;
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
+        image2.read_tga_file(filenameTGA);
+       afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
         image.flip_vertically();
         image.write_tga_file("output3.tga");
 
