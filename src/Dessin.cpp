@@ -75,9 +75,9 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 }
 
 TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3){
-    float moyenneR = ((float)p1.color.bgra[2] * v.x + (float)p2.color.bgra[2] * v.y + (float)p3.color.bgra[2] * v.z);
+    float moyenneR = ((float)p1.color.bgra[0] * v.x + (float)p2.color.bgra[0] * v.y + (float)p3.color.bgra[0] * v.z);
     float moyenneG = ((float)p1.color.bgra[1] * v.x + (float)p2.color.bgra[1] * v.y + (float)p3.color.bgra[1] * v.z);
-    float moyenneB = ((float)p1.color.bgra[0] * v.x + (float)p2.color.bgra[0] * v.y + (float)p3.color.bgra[0] * v.z);
+    float moyenneB = ((float)p1.color.bgra[2] * v.x + (float)p2.color.bgra[2] * v.y + (float)p3.color.bgra[2] * v.z);
     TGAColor newColor(moyenneR, moyenneG, moyenneB, 255);
     return newColor;
 }
@@ -86,7 +86,6 @@ TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3){
 void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
-    Vecteur col;
     float z;
     pointf newPt;
 
@@ -96,7 +95,7 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
             newPt.y = j;
             v = barycentrique(newPt, pt1, pt2, pt3);
             if (isInTriangle(v)) {
-                newPt.color = interpolateTriangle(col, pt1, pt2, pt3);
+                newPt.color = interpolateTriangle(v, pt1, pt2, pt3);
                 z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z ;
                 if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = z;

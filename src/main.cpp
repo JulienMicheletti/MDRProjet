@@ -75,7 +75,7 @@ TGAColor getTextureImage(pointf texture, TGAImage &image){
 
 TGAColor convertirIntensite(pointf pixel, float intensite){
     TGAColor color = pixel.color;
-    TGAColor newColor((float)color.bgra[2] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[0]*intensite, 255);
+    TGAColor newColor((float)color.bgra[0] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[2]*intensite, 255);
     return newColor;
 }
 
@@ -105,7 +105,7 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
         }
         inte = intensite(world);
         for (int w = 0; w < 3; w++){
-            screen[w].color = convertirIntensite(screen[w], inte);
+           screen[w].color = convertirIntensite(screen[w], inte);
         }
         if (inte > 0) {
            dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer);
@@ -121,9 +121,10 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
         const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
         string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
         image2.read_tga_file(filenameTGA);
+        image2.flip_vertically();
        afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
         image.flip_vertically();
-        image.write_tga_file("output3.tga");
+        image.write_tga_file("output4.tga");
 
         return 0;
     }
