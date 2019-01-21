@@ -97,8 +97,8 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
-            texture.x =  strtof(textures[lignes[i-j+1]][2].c_str(), 0) * 250 + 250;
-            texture.y =  strtof(textures[lignes[i-j+1]][3].c_str(), 0) * 250 + 250;
+            texture.x =  strtof(textures[lignes[i-j+1]][2].c_str(), 0) * 1024;
+            texture.y =  strtof(textures[lignes[i-j+1]][3].c_str(), 0) * 1024;
             p.color = getTextureImage(texture, imagetga);
             screen.push_back(p);
             world.push_back(pf);
@@ -124,7 +124,7 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
         image2.flip_vertically();
        afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
         image.flip_vertically();
-        image.write_tga_file("output4.tga");
+        image.write_tga_file("output3.tga");
 
         return 0;
     }

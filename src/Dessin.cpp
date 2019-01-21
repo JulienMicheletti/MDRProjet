@@ -75,6 +75,7 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 }
 
 TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3){
+
     float moyenneR = ((float)p1.color.bgra[0] * v.x + (float)p2.color.bgra[0] * v.y + (float)p3.color.bgra[0] * v.z);
     float moyenneG = ((float)p1.color.bgra[1] * v.x + (float)p2.color.bgra[1] * v.y + (float)p3.color.bgra[1] * v.z);
     float moyenneB = ((float)p1.color.bgra[2] * v.x + (float)p2.color.bgra[2] * v.y + (float)p3.color.bgra[2] * v.z);
