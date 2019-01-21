@@ -74,17 +74,24 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 
 }
 
-TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3){
+TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
+    TGAColor color;
 
-    float moyenneR = ((float)p1.color.bgra[0] * v.x + (float)p2.color.bgra[0] * v.y + (float)p3.color.bgra[0] * v.z);
-    float moyenneG = ((float)p1.color.bgra[1] * v.x + (float)p2.color.bgra[1] * v.y + (float)p3.color.bgra[1] * v.z);
-    float moyenneB = ((float)p1.color.bgra[2] * v.x + (float)p2.color.bgra[2] * v.y + (float)p3.color.bgra[2] * v.z);
-    TGAColor newColor(moyenneR, moyenneG, moyenneB, 255);
+    newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*width;
+    newPt.colorY = (p1.colorY * v.x + p2.colorY * v.y + p3.colorY * v.z)*width;
+
+    color = image.get(newPt.colorX, newPt.colorY);
+    return color;
+}
+
+TGAColor convertirIntensite(pointf pixel, float intensite){
+    TGAColor color = pixel.color;
+    TGAColor newColor((float)color.bgra[2] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[0]*intensite, 255);
     return newColor;
 }
 
 
-void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer) {
+void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, float inte, TGAImage &tgaImage) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
     float z;
@@ -96,10 +103,11 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
             newPt.y = j;
             v = barycentrique(newPt, pt1, pt2, pt3);
             if (isInTriangle(v)) {
-                newPt.color = interpolateTriangle(v, pt1, pt2, pt3);
                 z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z ;
                 if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = z;
+                    newPt.color = interpolateTriangle(v, pt1, pt2, pt3, tgaImage, newPt);
+                    newPt.color = convertirIntensite(newPt, inte);
                     image.set(newPt.x, newPt.y, newPt.color);
               }
             }

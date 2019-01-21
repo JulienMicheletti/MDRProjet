@@ -67,18 +67,6 @@ float intensite(vector<pointf> world) {
 
 }
 
-TGAColor getTextureImage(pointf texture, TGAImage &image){
-    TGAColor color;
-    color = image.get(texture.x, texture.y);
-   return color;
-}
-
-TGAColor convertirIntensite(pointf pixel, float intensite){
-    TGAColor color = pixel.color;
-    TGAColor newColor((float)color.bgra[0] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[2]*intensite, 255);
-    return newColor;
-}
-
 void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures, TGAImage &image, TGAImage &imagetga) {
     vector<pointf> screen;
     vector<pointf> world;
@@ -86,7 +74,6 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     Dessin dessin;
     pointf p;
     pointf pf;
-    pointf texture;
     float inte;
     float *zbuffer = new float[width*heigth];
     for (int i = 5; i < lignes.size(); i+=6) {
@@ -97,18 +84,14 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
-            texture.x =  strtof(textures[lignes[i-j+1]][2].c_str(), 0) * 1024;
-            texture.y =  strtof(textures[lignes[i-j+1]][3].c_str(), 0) * 1024;
-            p.color = getTextureImage(texture, imagetga);
+            p.colorX =  strtof(textures[lignes[i-j+1]][2].c_str(), 0);
+            p.colorY =  strtof(textures[lignes[i-j+1]][3].c_str(), 0);
             screen.push_back(p);
             world.push_back(pf);
         }
         inte = intensite(world);
-        for (int w = 0; w < 3; w++){
-           screen[w].color = convertirIntensite(screen[w], inte);
-        }
         if (inte > 0) {
-           dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer);
+           dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, inte, imagetga);
         }
         screen.clear();
         world.clear();
