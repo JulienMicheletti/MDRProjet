@@ -77,8 +77,8 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
     TGAColor color;
 
-    newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*width;
-    newPt.colorY = (p1.colorY * v.x + p2.colorY * v.y + p3.colorY * v.z)*width;
+    newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*1024;
+    newPt.colorY = (p1.colorY * v.x + p2.colorY * v.y + p3.colorY * v.z)*1024;
 
     color = image.get(newPt.colorX, newPt.colorY);
     return color;

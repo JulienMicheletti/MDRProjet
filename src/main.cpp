@@ -101,8 +101,8 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     int main(int ac, char **av) {
         TGAImage image(500, 500, TGAImage::RGB);
         TGAImage image2;
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
+        const char *filenameTGA = "../african_head_diffuse.tga";
+        string filename = "../african_head.txt";
         image2.read_tga_file(filenameTGA);
         image2.flip_vertically();
        afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);

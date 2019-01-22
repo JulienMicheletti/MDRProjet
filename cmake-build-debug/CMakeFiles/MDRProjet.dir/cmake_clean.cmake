@@ -3,10 +3,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.obj"
   "CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.obj"
   "CMakeFiles/MDRProjet.dir/src/Dessin.cpp.obj"
+  "CMakeFiles/MDRProjet.dir/src/Matrice.cpp.obj"
   "MDRProjet.pdb"
   "MDRProjet.exe"
   "MDRProjet.exe.manifest"
-  "MDRProjet.lib"
+  "libMDRProjet.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.
