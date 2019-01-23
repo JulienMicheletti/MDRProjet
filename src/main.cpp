@@ -1,4 +1,5 @@
 #include "main.h"
+#include "Matrice.h"
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -78,9 +79,14 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     float *zbuffer = new float[width*heigth];
     for (int i = 5; i < lignes.size(); i+=6) {
         for (int j = 5; j >= 0; j-=2) {
-            p.x = strtof(points[lignes[i-j]][1].c_str(), 0) * 250 + 250;
-            p.y = strtof(points[lignes[i-j]][2].c_str(), 0) * 250 + 250;
-            p.z = strtof(points[lignes[i-j]][3].c_str(), 0) * 250 + 250;
+            p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
+            p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
+            p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
+            Matrice matrice(p);
+            p = matrice.calculerMatrice();
+            p.x = p.x * 250 + 250;
+            p.y = p.y * 250 + 250;
+            p.z = p.z * 250 + 250;
             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
@@ -101,13 +107,14 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     int main(int ac, char **av) {
         TGAImage image(500, 500, TGAImage::RGB);
         TGAImage image2;
-        const char *filenameTGA = "../african_head_diffuse.tga";
-        string filename = "../african_head.txt";
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
         image2.read_tga_file(filenameTGA);
         image2.flip_vertically();
        afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
         image.flip_vertically();
-        image.write_tga_file("output3.tga");
+        pointf p;
+        image.write_tga_file("output.tga");
 
         return 0;
     }

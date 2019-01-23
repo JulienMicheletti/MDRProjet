@@ -4,6 +4,7 @@
 
 #include "Dessin.h"
 #include "main.h"
+#include "Matrice.h"
 
 Dessin::Dessin(){}
 
@@ -103,9 +104,9 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
             newPt.y = j;
             v = barycentrique(newPt, pt1, pt2, pt3);
             if (isInTriangle(v)) {
-                z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z ;
-                if (zbuffer[int(newPt.x + newPt.y * width)] < z) {
-                    zbuffer[int(newPt.x + newPt.y * width)] = z;
+                newPt.z = pt1.z * v.x + pt2.z * v.y + pt3.z * v.z ;
+                if (int(newPt.x + newPt.y * width) > 0 && zbuffer[int(newPt.x + newPt.y * width)] < newPt.z) {
+                    zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
                     newPt.color = interpolateTriangle(v, pt1, pt2, pt3, tgaImage, newPt);
                     newPt.color = convertirIntensite(newPt, inte);
                     image.set(newPt.x, newPt.y, newPt.color);

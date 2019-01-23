@@ -8,111 +8,109 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="MDRProjet">
-				<Option output="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="MDRProjet/fast">
-				<Option output="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug"/>
+				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Julien/CLionProjects/MoteurRenduProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MDRProjet">
+				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/x86_64-pc-cygwin"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MDRProjet/fast">
+				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/x86_64-pc-cygwin"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet/fast"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.cpp">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.h">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Matrice.cpp">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Matrice.h">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Vecteur.cpp">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Vecteur.h">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/main.cpp">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/main.h">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/tgaimage.cpp">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.cpp">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/tgaimage.h">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.h">
 			<Option target="MDRProjet"/>
 		</Unit>
-		<Unit filename="C:/Users/Julien/CLionProjects/MoteurRenduProjet/CMakeLists.txt">
+		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

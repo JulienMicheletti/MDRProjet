@@ -1,12 +1,11 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MDRProjet.dir/src/main.cpp.obj"
-  "CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.obj"
-  "CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.obj"
-  "CMakeFiles/MDRProjet.dir/src/Dessin.cpp.obj"
-  "CMakeFiles/MDRProjet.dir/src/Matrice.cpp.obj"
+  "CMakeFiles/MDRProjet.dir/src/main.cpp.o"
+  "CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.o"
+  "CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.o"
+  "CMakeFiles/MDRProjet.dir/src/Dessin.cpp.o"
+  "CMakeFiles/MDRProjet.dir/src/Matrice.cpp.o"
   "MDRProjet.pdb"
   "MDRProjet.exe"
-  "MDRProjet.exe.manifest"
   "libMDRProjet.dll.a"
 )
 

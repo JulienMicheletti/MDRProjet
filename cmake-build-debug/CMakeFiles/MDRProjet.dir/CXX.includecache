@@ -6,21 +6,37 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.cpp
-Dessin.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.h
-main.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/main.h
-
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h
 tgaimage.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/tgaimage.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
 main.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/main.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.h
 
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Vecteur.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.cpp
+cstdio
+-
+Matrice.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.h
+Dessin.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h
 
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/main.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.h
+vector
+-
+sstream
+-
+Dessin.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h
+
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.h
+
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.cpp
+main.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.h
+Matrice.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.h
+
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.h
 iostream
 -
 fstream
@@ -36,13 +52,13 @@ vector
 sstream
 -
 tgaimage.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/tgaimage.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
 Vecteur.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Vecteur.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.h
 Dessin.h
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/Dessin.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h
 
-C:/Users/Julien/CLionProjects/MoteurRenduProjet/src/tgaimage.h
+/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.h
 fstream
 -
 
