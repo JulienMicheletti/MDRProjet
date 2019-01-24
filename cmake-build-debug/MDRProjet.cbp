@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="MDRProjet">
-				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="MProjet">
+				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MProjet.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -42,14 +42,14 @@
 					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MProjet"/>
 					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="MDRProjet/fast">
-				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MDRProjet.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="MProjet/fast">
+				<Option output="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/MProjet.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -63,7 +63,7 @@
 					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MDRProjet/fast"/>
+					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 MProjet/fast"/>
 					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -81,34 +81,34 @@
 			</Target>
 		</Build>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.cpp">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Dessin.h">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.cpp">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Matrice.h">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.cpp">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/Vecteur.h">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.cpp">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/main.h">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.cpp">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/src/tgaimage.h">
-			<Option target="MDRProjet"/>
+			<Option target="MProjet"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Julien/CLionProjects/MProjet/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

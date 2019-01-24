@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MDRProjet
+# Target rules for targets named MProjet
 
 # Build rule for target.
-MDRProjet: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 MDRProjet
-.PHONY : MDRProjet
+MProjet: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MProjet
+.PHONY : MProjet
 
 # fast build rule for target.
-MDRProjet/fast:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/build
-.PHONY : MDRProjet/fast
+MProjet/fast:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/build
+.PHONY : MProjet/fast
 
 src/Dessin.o: src/Dessin.cpp.o
 
@@ -129,7 +129,7 @@ src/Dessin.o: src/Dessin.cpp.o
 
 # target to build an object file
 src/Dessin.cpp.o:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Dessin.cpp.o
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Dessin.cpp.o
 .PHONY : src/Dessin.cpp.o
 
 src/Dessin.i: src/Dessin.cpp.i
@@ -138,7 +138,7 @@ src/Dessin.i: src/Dessin.cpp.i
 
 # target to preprocess a source file
 src/Dessin.cpp.i:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Dessin.cpp.i
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Dessin.cpp.i
 .PHONY : src/Dessin.cpp.i
 
 src/Dessin.s: src/Dessin.cpp.s
@@ -147,7 +147,7 @@ src/Dessin.s: src/Dessin.cpp.s
 
 # target to generate assembly for a file
 src/Dessin.cpp.s:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Dessin.cpp.s
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Dessin.cpp.s
 .PHONY : src/Dessin.cpp.s
 
 src/Matrice.o: src/Matrice.cpp.o
@@ -156,7 +156,7 @@ src/Matrice.o: src/Matrice.cpp.o
 
 # target to build an object file
 src/Matrice.cpp.o:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Matrice.cpp.o
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Matrice.cpp.o
 .PHONY : src/Matrice.cpp.o
 
 src/Matrice.i: src/Matrice.cpp.i
@@ -165,7 +165,7 @@ src/Matrice.i: src/Matrice.cpp.i
 
 # target to preprocess a source file
 src/Matrice.cpp.i:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Matrice.cpp.i
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Matrice.cpp.i
 .PHONY : src/Matrice.cpp.i
 
 src/Matrice.s: src/Matrice.cpp.s
@@ -174,7 +174,7 @@ src/Matrice.s: src/Matrice.cpp.s
 
 # target to generate assembly for a file
 src/Matrice.cpp.s:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Matrice.cpp.s
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Matrice.cpp.s
 .PHONY : src/Matrice.cpp.s
 
 src/Vecteur.o: src/Vecteur.cpp.o
@@ -183,7 +183,7 @@ src/Vecteur.o: src/Vecteur.cpp.o
 
 # target to build an object file
 src/Vecteur.cpp.o:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.o
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Vecteur.cpp.o
 .PHONY : src/Vecteur.cpp.o
 
 src/Vecteur.i: src/Vecteur.cpp.i
@@ -192,7 +192,7 @@ src/Vecteur.i: src/Vecteur.cpp.i
 
 # target to preprocess a source file
 src/Vecteur.cpp.i:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.i
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Vecteur.cpp.i
 .PHONY : src/Vecteur.cpp.i
 
 src/Vecteur.s: src/Vecteur.cpp.s
@@ -201,7 +201,7 @@ src/Vecteur.s: src/Vecteur.cpp.s
 
 # target to generate assembly for a file
 src/Vecteur.cpp.s:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/Vecteur.cpp.s
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Vecteur.cpp.s
 .PHONY : src/Vecteur.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -210,7 +210,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/main.cpp.o
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -219,7 +219,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -228,7 +228,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/tgaimage.o: src/tgaimage.cpp.o
@@ -237,7 +237,7 @@ src/tgaimage.o: src/tgaimage.cpp.o
 
 # target to build an object file
 src/tgaimage.cpp.o:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.o
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/tgaimage.cpp.o
 .PHONY : src/tgaimage.cpp.o
 
 src/tgaimage.i: src/tgaimage.cpp.i
@@ -246,7 +246,7 @@ src/tgaimage.i: src/tgaimage.cpp.i
 
 # target to preprocess a source file
 src/tgaimage.cpp.i:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.i
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/tgaimage.cpp.i
 .PHONY : src/tgaimage.cpp.i
 
 src/tgaimage.s: src/tgaimage.cpp.s
@@ -255,7 +255,7 @@ src/tgaimage.s: src/tgaimage.cpp.s
 
 # target to generate assembly for a file
 src/tgaimage.cpp.s:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/src/tgaimage.cpp.s
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/tgaimage.cpp.s
 .PHONY : src/tgaimage.cpp.s
 
 # Help Target
@@ -265,7 +265,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... MDRProjet"
+	@echo "... MProjet"
 	@echo "... edit_cache"
 	@echo "... src/Dessin.o"
 	@echo "... src/Dessin.i"

@@ -65,39 +65,39 @@ CMAKE_SOURCE_DIR = /cygdrive/c/Users/Julien/CLionProjects/MProjet
 CMAKE_BINARY_DIR = /cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/MDRProjet.dir
+# Target rules for target CMakeFiles/MProjet.dir
 
 # All Build rule for target.
-CMakeFiles/MDRProjet.dir/all:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/depend
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target MDRProjet"
-.PHONY : CMakeFiles/MDRProjet.dir/all
+CMakeFiles/MProjet.dir/all:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/depend
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target MProjet"
+.PHONY : CMakeFiles/MProjet.dir/all
 
 # Include target in all.
-all: CMakeFiles/MDRProjet.dir/all
+all: CMakeFiles/MProjet.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/MDRProjet.dir/rule: cmake_check_build_system
+CMakeFiles/MProjet.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/MDRProjet.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/MProjet.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/c/Users/Julien/CLionProjects/MProjet/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/MDRProjet.dir/rule
+.PHONY : CMakeFiles/MProjet.dir/rule
 
 # Convenience name for target.
-MDRProjet: CMakeFiles/MDRProjet.dir/rule
+MProjet: CMakeFiles/MProjet.dir/rule
 
-.PHONY : MDRProjet
-
-# clean rule for target.
-CMakeFiles/MDRProjet.dir/clean:
-	$(MAKE) -f CMakeFiles/MDRProjet.dir/build.make CMakeFiles/MDRProjet.dir/clean
-.PHONY : CMakeFiles/MDRProjet.dir/clean
+.PHONY : MProjet
 
 # clean rule for target.
-clean: CMakeFiles/MDRProjet.dir/clean
+CMakeFiles/MProjet.dir/clean:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/clean
+.PHONY : CMakeFiles/MProjet.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/MProjet.dir/clean
 
 .PHONY : clean
 

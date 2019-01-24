@@ -13,15 +13,20 @@
 class Matrice {
 protected:
     int size;
-    float matrice[4][1];
-    float matriceMult[4][4];
-    float matriceDim[4][4];
-    float result[4][1];
+    float** matrice;
+    int lignes;
+    int colonnes;
     pointf pointf1;
     float c;
 
     public:
-    Matrice(pointf);
+    Matrice(int c, int l);
+    int getColonnes();
+    int getLignes();
+    void afficher();
+    Matrice multiplier(Matrice m2);
+    float** getMatrice();
+    static Matrice matriceId();
     pointf calculerMatrice();
 
     float getC();

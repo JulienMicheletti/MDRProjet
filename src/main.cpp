@@ -68,6 +68,44 @@ float intensite(vector<pointf> world) {
 
 }
 
+Matrice viewPort(){
+    float dimX = 500/8;
+    float dimY = 500/8;
+    float dimW = 500*3/4;
+    float dimH = 500*3/4;
+    Matrice m = Matrice::matriceId();
+    float** tab = m.getMatrice();
+    tab[0][3] = dimX + dimW / 2.f;
+    tab[1][3] = dimY + dimH / 2.f;
+    tab[2][3] = 255 / 2.f;
+
+    tab[0][0] = dimW / 2.f;
+    tab[1][1] = dimH / 2.f;
+    tab[2][2] = 255/2.f;
+
+    return m;
+
+}
+
+Matrice createCordMatrice(pointf p){
+    Matrice matrice(4, 1);
+
+    matrice.getMatrice()[0][0] = p.x;
+    matrice.getMatrice()[1][0] = p.y;
+    matrice.getMatrice()[2][0] = p.z;
+    matrice.getMatrice()[3][0] = 1.f;
+    return matrice;
+}
+
+pointf division(Matrice m){
+    pointf p;
+    p.x = m.getMatrice()[0][0]/m.getMatrice()[3][0];
+    p.y = m.getMatrice()[1][0]/m.getMatrice()[3][0];
+    p.z = m.getMatrice()[2][0]/m.getMatrice()[3][0];
+    return p;
+}
+
+
 void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures, TGAImage &image, TGAImage &imagetga) {
     vector<pointf> screen;
     vector<pointf> world;
@@ -77,17 +115,21 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     pointf pf;
     float inte;
     float *zbuffer = new float[width*heigth];
+    pointf camera;
+    camera.x = 0;
+    camera.y = 0;
+    camera.z = 1;
+    Matrice m = Matrice::matriceId();
+    Matrice res1(4,4);
+    m.getMatrice()[3][2] = -1.f/camera.z;
     for (int i = 5; i < lignes.size(); i+=6) {
         for (int j = 5; j >= 0; j-=2) {
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
             p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
             p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-            Matrice matrice(p);
-            p = matrice.calculerMatrice();
-            p.x = p.x * 250 + 250;
-            p.y = p.y * 250 + 250;
-            p.z = p.z * 250 + 250;
-            pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
+            res1 = viewPort().multiplier(m);
+            p = division(res1.multiplier(createCordMatrice(p)));
+             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
             pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
             pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
             p.colorX =  strtof(textures[lignes[i-j+1]][2].c_str(), 0);
@@ -113,7 +155,6 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
         image2.flip_vertically();
        afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
         image.flip_vertically();
-        pointf p;
         image.write_tga_file("output.tga");
 
         return 0;
