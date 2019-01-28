@@ -113,6 +113,14 @@ Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up){
 
 }
 
+pointf m2v (Matrice m){
+    pointf p;
+    p.x = m.getMatrice()[0][0]/m.getMatrice()[3][0];
+    p.y = m.getMatrice()[1][0]/m.getMatrice()[3][0];
+    p.z = m.getMatrice()[2][0]/m.getMatrice()[3][0];
+    return p;
+}
+
 void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures,vector<vector<std::string> > intensite,  TGAImage &image, TGAImage &imagetga) {
     Vecteur eye(1, 1, 3);
     Vecteur center(0, 0, 0);
@@ -132,11 +140,7 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
             p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
             p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-          //  world.push_back(p);
-            Matrice res = vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p));
-            p.x = res.getMatrice()[0][0];
-            p.y = res.getMatrice()[1][0];
-            p.z = res.getMatrice()[2][0];
+            p = m2v(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p)));
             p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
             p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
             Vecteur inte(strtof(intensite[lignes[i - j]][2].c_str(), 0), strtof(intensite[lignes[i - j]][3].c_str(), 0), strtof(intensite[lignes[i - j]][4].c_str(), 0));
