@@ -1,6 +1,8 @@
 #include "main.h"
 #include "Matrice.h"
+#include <chrono>
 
+using namespace std::chrono;
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
     std::vector<int> tab;
@@ -29,7 +31,7 @@ vector<int> readLine(string filename) {
     return tab;
 }
 
-std::vector<vector<std::string> > readPoint(string filename, bool type){
+std::vector<vector<std::string> > readPoint(string filename, int type){
     ifstream fichier(filename.c_str(), ios::in);
     std::vector<std::vector<std::string> > tab;
     std::vector<std::string> tmp;
@@ -41,10 +43,13 @@ std::vector<vector<std::string> > readPoint(string filename, bool type){
             while(std::getline(iss, token, ' ')){
                 tmp.push_back(token);
             }
-            if (line[0] == 'v' && line[1] != 't' && type){
+            if (line[0] == 'v' && line[1] != 't' && type == 0){
                 tab.push_back(tmp);
             }
-            if (line[0] == 'v' && line[1] == 't' && !type){
+            if (line[0] == 'v' && line[1] == 't' && type == 1){
+                tab.push_back(tmp);
+            }
+            if (line[0] == 'v' && line[1] == 'n' && type == 2){
                 tab.push_back(tmp);
             }
             tmp.clear();
@@ -56,13 +61,9 @@ std::vector<vector<std::string> > readPoint(string filename, bool type){
     return tab;
 }
 
-float intensite(vector<pointf> world) {
-    Vecteur vecteur1(world[1].x - world[0].x, world[1].y - world[0].y, world[1].z - world[0].z);
-    Vecteur vecteur2(world[2].x - world[0].x, world[2].y - world[0].y, world[2].z - world[0].z);
+float getIntensite(Vecteur intensite) {
     Vecteur light(1, -1, 1);
-    Vecteur normal;
-    normal = vecteur1.normal(vecteur2);
-    normal = normal.normalize();
+    Vecteur normal = intensite.normalize();
     light = light.normalize();
     return normal.produitScal(light);
 
@@ -117,18 +118,12 @@ Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up){
 
 }
 
-void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures, TGAImage &image, TGAImage &imagetga) {
+void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures,vector<vector<std::string> > intensite,  TGAImage &image, TGAImage &imagetga) {
     vector<pointf> screen;
     vector<pointf> world;
-    vector<TGAColor> color;
     Dessin dessin;
     pointf p;
-    float inte;
     float *zbuffer = new float[width * heigth];
-    pointf camera;
-    camera.x = 0;
-    camera.y = 0;
-    camera.z = 3;
     Matrice m = Matrice::matriceId();
     Matrice modelView = lookat(Vecteur(1, 1, 3), Vecteur(0, 0, 0), Vecteur(0, 1, 0));
     for (int i = 5; i < lignes.size(); i += 6) {
@@ -145,27 +140,31 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
             p.z = res.getMatrice()[2][0];
             p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
             p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
+            Vecteur inte(strtof(intensite[lignes[i - j]][2].c_str(), 0), strtof(intensite[lignes[i - j]][3].c_str(), 0), strtof(intensite[lignes[i - j]][4].c_str(), 0));
+            p.intensite = getIntensite(inte);
             screen.push_back(p);
         }
-        inte = intensite(world);
-        if (inte > 0) {
-            dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, inte, imagetga);
-        }
+        dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, imagetga);
         screen.clear();
         world.clear();
     }
 }
 
     int main(int ac, char **av) {
+        auto start = high_resolution_clock::now();
         TGAImage image(500, 500, TGAImage::RGB);
         TGAImage image2;
         const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
         string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
         image2.read_tga_file(filenameTGA);
         image2.flip_vertically();
-       afficher(readPoint(filename, true), readLine(filename), readPoint(filename, false), image, image2);
+       afficher(readPoint(filename, 0), readLine(filename), readPoint(filename, 1),  readPoint(filename, 2), image, image2);
         image.flip_vertically();
         image.write_tga_file("output.tga");
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+
+        cout << duration.count() << endl;
 
         return 0;
     }

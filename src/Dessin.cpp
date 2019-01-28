@@ -85,16 +85,25 @@ TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImag
     return color;
 }
 
-TGAColor convertirIntensite(pointf pixel, float intensite){
+float interpolateIntensite(Vecteur v, pointf p1, pointf p2, pointf p3, pointf newPt){
+   newPt.intensite = p1.intensite * v.x + p2.intensite * v.y + p3.intensite * v.z;
+
+   return newPt.intensite;
+}
+
+
+
+
+TGAColor convertirIntensite(pointf pixel){
     TGAColor color = pixel.color;
-    TGAColor newColor((float)color.bgra[2] * intensite, (float)color.bgra[1]*intensite, (float)color.bgra[0]*intensite, 255);
+    TGAColor newColor((float)color.bgra[2] * pixel.intensite, (float)color.bgra[1]* pixel.intensite, (float)color.bgra[0]* pixel.intensite, 255);
     return newColor;
 }
 
 
 
 
-void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, float inte, TGAImage &tgaImage) {
+void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, TGAImage &tgaImage) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
     float z;
@@ -110,8 +119,11 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
                 if (int(newPt.x + newPt.y * width) > 0 && zbuffer[int(newPt.x + newPt.y * width)] < newPt.z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
                     newPt.color = interpolateTriangle(v, pt1, pt2, pt3, tgaImage, newPt);
-                    newPt.color = convertirIntensite(newPt, inte);
+                    newPt.intensite = interpolateIntensite(v, pt1, pt2, pt3, newPt);
+                    if (newPt.intensite > 0) {
+                    newPt.color = convertirIntensite(newPt);
                     image.set(newPt.x, newPt.y, newPt.color);
+                }
               }
             }
         }
