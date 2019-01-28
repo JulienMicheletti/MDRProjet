@@ -13,10 +13,24 @@ Vecteur::Vecteur(float x, float y, float z){
         this->z = z;
     }
 
+    float Vecteur::get(int i){
+        if (i == 0){
+            return x;
+        }else if (i == 1){
+            return y;
+        }else{
+            return z;
+        }
+}
     Vecteur Vecteur::plus(Vecteur v){
         Vecteur newVect(v.x + x, v.y + y, v.z + z);
         return newVect;
-    };
+    }
+
+    Vecteur Vecteur::moins(Vecteur v){
+        Vecteur newVect(x - v.x, y - v.y, z - v.z);
+        return newVect;
+}
 
     Vecteur Vecteur::div (float num)
     {

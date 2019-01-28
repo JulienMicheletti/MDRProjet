@@ -17,6 +17,8 @@ public:
     Vecteur div (float num);
     Vecteur normal(Vecteur v);
     float produitScal(Vecteur v);
+    float get(int i);
+    Vecteur moins(Vecteur);
     float norme();
     Vecteur normalize();
 

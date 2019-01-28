@@ -59,11 +59,11 @@ std::vector<vector<std::string> > readPoint(string filename, bool type){
 float intensite(vector<pointf> world) {
     Vecteur vecteur1(world[1].x - world[0].x, world[1].y - world[0].y, world[1].z - world[0].z);
     Vecteur vecteur2(world[2].x - world[0].x, world[2].y - world[0].y, world[2].z - world[0].z);
-    Vecteur light(0, 0, 1);
+    Vecteur light(1, -1, 1);
     Vecteur normal;
     normal = vecteur1.normal(vecteur2);
     normal = normal.normalize();
-
+    light = light.normalize();
     return normal.produitScal(light);
 
 }
@@ -97,14 +97,25 @@ Matrice createCordMatrice(pointf p){
     return matrice;
 }
 
-pointf division(Matrice m){
-    pointf p;
-    p.x = m.getMatrice()[0][0]/m.getMatrice()[3][0];
-    p.y = m.getMatrice()[1][0]/m.getMatrice()[3][0];
-    p.z = m.getMatrice()[2][0]/m.getMatrice()[3][0];
-    return p;
-}
+Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up){
+    Vecteur z = eye.moins(centre);
+    z = z.normalize();
+    Vecteur x = up.normal(z).normalize();
+    Vecteur y = z.normal(x).normalize();
+    Matrice minV(4,4);
+    minV = minV.matriceId();
+    Matrice tr(4,4);
+    tr = tr.matriceId();
+    for (int i = 0; i<3; i++){
+        minV.getMatrice()[0][i] = x.get(i);
+        minV.getMatrice()[1][i] = y.get(i);
+        minV.getMatrice()[2][i] = z.get(i);
+        tr.getMatrice()[i][3] = -centre.get(i);
+    }
+    Matrice modelView = minV.multiplier(tr);
+    return modelView;
 
+}
 
 void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures, TGAImage &image, TGAImage &imagetga) {
     vector<pointf> screen;
@@ -112,39 +123,38 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
     vector<TGAColor> color;
     Dessin dessin;
     pointf p;
-    pointf pf;
     float inte;
-    float *zbuffer = new float[width*heigth];
+    float *zbuffer = new float[width * heigth];
     pointf camera;
     camera.x = 0;
     camera.y = 0;
-    camera.z = 1;
+    camera.z = 3;
     Matrice m = Matrice::matriceId();
-    Matrice res1(4,4);
-    m.getMatrice()[3][2] = -1.f/camera.z;
-    for (int i = 5; i < lignes.size(); i+=6) {
-        for (int j = 5; j >= 0; j-=2) {
+    Matrice modelView = lookat(Vecteur(1, 1, 3), Vecteur(0, 0, 0), Vecteur(0, 1, 0));
+    for (int i = 5; i < lignes.size(); i += 6) {
+        for (int j = 5; j >= 0; j -= 2) {
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
             p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
             p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-            res1 = viewPort().multiplier(m);
-            p = division(res1.multiplier(createCordMatrice(p)));
-             pf.x = strtof(points[lignes[i-j]][1].c_str(), 0);
-            pf.y = strtof(points[lignes[i-j]][2].c_str(), 0);
-            pf.z = strtof(points[lignes[i-j]][3].c_str(), 0);
-            p.colorX =  strtof(textures[lignes[i-j+1]][2].c_str(), 0);
-            p.colorY =  strtof(textures[lignes[i-j+1]][3].c_str(), 0);
+            world.push_back(p);
+            Matrice res = viewPort().multiplier(m);
+            res = res.multiplier(modelView);
+            res = res.multiplier(createCordMatrice(p));
+            p.x = res.getMatrice()[0][0];
+            p.y = res.getMatrice()[1][0];
+            p.z = res.getMatrice()[2][0];
+            p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
+            p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
             screen.push_back(p);
-            world.push_back(pf);
         }
         inte = intensite(world);
         if (inte > 0) {
-           dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, inte, imagetga);
+            dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, inte, imagetga);
         }
         screen.clear();
         world.clear();
-        }
     }
+}
 
     int main(int ac, char **av) {
         TGAImage image(500, 500, TGAImage::RGB);

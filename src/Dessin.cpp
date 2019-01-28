@@ -91,6 +91,9 @@ TGAColor convertirIntensite(pointf pixel, float intensite){
     return newColor;
 }
 
+
+
+
 void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, float inte, TGAImage &tgaImage) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
