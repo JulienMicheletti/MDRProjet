@@ -47,16 +47,20 @@ Vecteur::Vecteur(float x, float y, float z){
         return n;
     }
 
+
     float Vecteur::produitScal(Vecteur v){
 
         return x * v.x + y * v.y + z * v.z;
 
     }
 
-    float Vecteur::norme()
+   float Vecteur::norme()
     {
         return sqrtf( Vecteur(x,y,z).produitScal(Vecteur(x,y,z)));
     }
+
+
+
 
     Vecteur Vecteur::normalize() {
         return (Vecteur(x, y, z).div(norme()));

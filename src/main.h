@@ -17,10 +17,9 @@
 #include "Vecteur.h"
 #include "Dessin.h"
 
-const TGAColor white = TGAColor(255, 255, 255, 255);
-const TGAColor red   = TGAColor(255, 0,   0,   255);
-const int width = 500;
-const int heigth = 500;
+const int width = 800;
+const int heigth = 800;
+const int depth = 255;
 using namespace std;
 
 

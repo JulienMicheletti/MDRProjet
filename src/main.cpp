@@ -70,19 +70,18 @@ float getIntensite(Vecteur intensite) {
 }
 
 Matrice viewPort(){
-    float dimX = 500/8;
-    float dimY = 500/8;
-    float dimW = 500*3/4;
-    float dimH = 500*3/4;
+    float dimX = width/8;
+    float dimY = heigth/8;
+    float dimW = width*3/4;
+    float dimH = heigth*3/4;
     Matrice m = Matrice::matriceId();
-    float** tab = m.getMatrice();
-    tab[0][3] = dimX + dimW / 2.f;
-    tab[1][3] = dimY + dimH / 2.f;
-    tab[2][3] = 255 / 2.f;
+    m.getMatrice()[0][3] = dimX + dimW / 2.f;
+    m.getMatrice()[1][3] = dimY + dimH / 2.f;
+    m.getMatrice()[2][3] = depth / 2.f;
 
-    tab[0][0] = dimW / 2.f;
-    tab[1][1] = dimH / 2.f;
-    tab[2][2] = 255/2.f;
+    m.getMatrice()[0][0] = dimW / 2.f;
+    m.getMatrice()[1][1] = dimH / 2.f;
+    m.getMatrice()[2][2] = depth / 2.f;
 
     return m;
 
@@ -99,42 +98,42 @@ Matrice createCordMatrice(pointf p){
 }
 
 Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up){
-    Vecteur z = eye.moins(centre);
-    z = z.normalize();
-    Vecteur x = up.normal(z).normalize();
-    Vecteur y = z.normal(x).normalize();
+    Vecteur z = (eye.moins(centre)).normalize();
+    Vecteur x = (up.normal(z)).normalize();
+    Vecteur y = (z.normal(x)).normalize();
     Matrice minV(4,4);
     minV = minV.matriceId();
-    Matrice tr(4,4);
-    tr = tr.matriceId();
     for (int i = 0; i<3; i++){
         minV.getMatrice()[0][i] = x.get(i);
         minV.getMatrice()[1][i] = y.get(i);
         minV.getMatrice()[2][i] = z.get(i);
-        tr.getMatrice()[i][3] = -centre.get(i);
+        minV.getMatrice()[i][3] = -centre.get(i);
     }
-    Matrice modelView = minV.multiplier(tr);
-    return modelView;
+    return minV;
 
 }
 
 void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures,vector<vector<std::string> > intensite,  TGAImage &image, TGAImage &imagetga) {
+    Vecteur eye(1, 1, 3);
+    Vecteur center(0, 0, 0);
     vector<pointf> screen;
     vector<pointf> world;
     Dessin dessin;
     pointf p;
     float *zbuffer = new float[width * heigth];
-    Matrice m = Matrice::matriceId();
-    Matrice modelView = lookat(Vecteur(1, 1, 3), Vecteur(0, 0, 0), Vecteur(0, 1, 0));
+    Matrice projection = Matrice::matriceId();
+    Matrice vp = viewPort();
+
+    projection.getMatrice()[3][2] = -1.f / ((eye.moins(center)).norme());
+    Matrice modelView = lookat(eye, center, Vecteur(0, 1, 0));
+
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
             p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
             p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-            world.push_back(p);
-            Matrice res = viewPort().multiplier(m);
-            res = res.multiplier(modelView);
-            res = res.multiplier(createCordMatrice(p));
+          //  world.push_back(p);
+            Matrice res = vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p));
             p.x = res.getMatrice()[0][0];
             p.y = res.getMatrice()[1][0];
             p.z = res.getMatrice()[2][0];
@@ -151,8 +150,7 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
 }
 
     int main(int ac, char **av) {
-        auto start = high_resolution_clock::now();
-        TGAImage image(500, 500, TGAImage::RGB);
+        TGAImage image(800, 800, TGAImage::RGB);
         TGAImage image2;
         const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head_diffuse.tga";
         string filename = "C:\\Users\\Julien\\CLionProjects\\MProjet\\african_head.txt";
@@ -161,10 +159,7 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
        afficher(readPoint(filename, 0), readLine(filename), readPoint(filename, 1),  readPoint(filename, 2), image, image2);
         image.flip_vertically();
         image.write_tga_file("output.tga");
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<microseconds>(stop - start);
 
-        cout << duration.count() << endl;
 
         return 0;
     }

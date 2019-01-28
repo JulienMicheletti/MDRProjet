@@ -121,9 +121,9 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
                     newPt.color = interpolateTriangle(v, pt1, pt2, pt3, tgaImage, newPt);
                     newPt.intensite = interpolateIntensite(v, pt1, pt2, pt3, newPt);
                     if (newPt.intensite > 0) {
-                    newPt.color = convertirIntensite(newPt);
-                    image.set(newPt.x, newPt.y, newPt.color);
-                }
+                        newPt.color = convertirIntensite(newPt);
+                        image.set(newPt.x, newPt.y, newPt.color);
+                    }
               }
             }
         }

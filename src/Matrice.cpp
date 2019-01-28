@@ -39,12 +39,11 @@ int Matrice::getColonnes() {
 
 Matrice Matrice::multiplier(Matrice m2){
     Matrice res(lignes, m2.getColonnes());
-    float** tab = res.getMatrice();
-    for (int i = 0; i < m2.getLignes(); i++){
+    for (int i = 0; i < lignes; i++){
         for (int j = 0; j < m2.getColonnes(); j++){
-            tab[i][j] = 0.f;
+            res.getMatrice()[i][j] = 0.f;
             for (int k = 0; k < colonnes; k++){
-                tab[i][j] += getMatrice()[i][k] * m2.getMatrice()[k][j];
+                res.getMatrice()[i][j] += getMatrice()[i][k] * m2.getMatrice()[k][j];
             }
         }
     }
