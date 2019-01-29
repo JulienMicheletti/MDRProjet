@@ -87,9 +87,7 @@ Matrice viewPort(){
 
 }
 
-Matrice createCordMatrice(pointf p){
-    Matrice matrice(4, 1);
-
+Matrice createCordMatrice(pointf p, Matrice matrice){
     matrice.getMatrice()[0][0] = p.x;
     matrice.getMatrice()[1][0] = p.y;
     matrice.getMatrice()[2][0] = p.z;
@@ -134,13 +132,15 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
 
     projection.getMatrice()[3][2] = -1.f / ((eye.moins(center)).norme());
     Matrice modelView = lookat(eye, center, Vecteur(0, 1, 0));
+    Matrice matrice(4, 1);
+
 
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
             p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
             p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-            p = m2v(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p)));
+            p = m2v(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p, matrice)));
             p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
             p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
             Vecteur inte(strtof(intensite[lignes[i - j]][2].c_str(), 0), strtof(intensite[lignes[i - j]][3].c_str(), 0), strtof(intensite[lignes[i - j]][4].c_str(), 0));
