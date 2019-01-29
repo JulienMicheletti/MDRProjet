@@ -5,6 +5,9 @@
 #ifndef MDRPROJET_VECTEUR_H
 #define MDRPROJET_VECTEUR_H
 
+
+#include <cmath>
+
 class Vecteur {
 public:
     float x;

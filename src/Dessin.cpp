@@ -3,42 +3,10 @@
 //
 
 #include "Dessin.h"
-#include "main.h"
-#include "Matrice.h"
 
 Dessin::Dessin(){}
 
-void Dessin::line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color) {
-    bool steep = false;
-    if (std::abs(x0-x1)<std::abs(y0-y1)) {
-        std::swap(x0, y0);
-        std::swap(x1, y1);
-        steep = true;
-    }
-    if (x0>x1) {
-        std::swap(x0, x1);
-        std::swap(y0, y1);
-    }
-    int dx = x1-x0;
-    int dy = y1-y0;
-    int derror2 = std::abs(dy)*2;
-    int error2 = 0;
-    int y = y0;
-    for (int x=x0; x<=x1; x++) {
-        if (steep) {
-            image.set(y, x, color);
-        } else {
-            image.set(x, y, color);
-        }
-        error2 += derror2;
-        if (error2 > dx) {
-            y += (y1 > y0 ? 1 : -1);
-            error2 -= dx*2;
-        }
-    }
-}
-
-Vecteur barycentrique(pointf p, pointf p1, pointf p2, pointf p3){
+Vecteur Dessin::barycentrique(pointf p, pointf p1, pointf p2, pointf p3){
     Vecteur w;
 
     w.x = (p2.y - p3.y)*(p.x - p3.x) + (p3.x - p2.x)*(p.y - p3.y);
@@ -59,7 +27,7 @@ bool Dessin::isInTriangle(Vecteur vecteur)
     return true;
 }
 
-vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
+vector<pointf> Dessin::findbox(pointf pt1, pointf pt2, pointf pt3){
     vector<pointf> box;
     pointf min;
     pointf max;
@@ -75,7 +43,7 @@ vector<pointf> findbox(pointf pt1, pointf pt2, pointf pt3){
 
 }
 
-TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
+TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
     TGAColor color;
 
     newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*1024;
@@ -85,23 +53,17 @@ TGAColor interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImag
     return color;
 }
 
-float interpolateIntensite(Vecteur v, pointf p1, pointf p2, pointf p3, pointf newPt){
+float Dessin::interpolateIntensite(Vecteur v, pointf p1, pointf p2, pointf p3, pointf newPt){
    newPt.intensite = p1.intensite * v.x + p2.intensite * v.y + p3.intensite * v.z;
 
    return newPt.intensite;
 }
 
-
-
-
-TGAColor convertirIntensite(pointf pixel){
+TGAColor Dessin::convertirIntensite(pointf pixel){
     TGAColor color = pixel.color;
     TGAColor newColor((float)color.bgra[2] * pixel.intensite, (float)color.bgra[1]* pixel.intensite, (float)color.bgra[0]* pixel.intensite, 255);
     return newColor;
 }
-
-
-
 
 void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, TGAImage &tgaImage) {
     vector <pointf> box = findbox(pt1, pt2, pt3);

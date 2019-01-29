@@ -1,6 +1,4 @@
-#include <cstdio>
 #include "Matrice.h"
-#include "Dessin.h"
 
 Matrice::Matrice(int lignes, int colonnes) {
     this->colonnes = colonnes;

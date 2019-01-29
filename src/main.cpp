@@ -1,4 +1,14 @@
-#include "main.h"
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <sstream>
+
+#include "tgaimage.h"
+#include "Vecteur.h"
+#include "Dessin.h"
 #include "Matrice.h"
 #include <chrono>
 

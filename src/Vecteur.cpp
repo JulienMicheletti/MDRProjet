@@ -2,7 +2,6 @@
 // Created by Julien on 16/01/2019.
 //
 
-#include <cmath>
 #include "Vecteur.h"
 
 Vecteur::Vecteur(){}
