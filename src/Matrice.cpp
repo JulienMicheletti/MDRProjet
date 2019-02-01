@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Matrice.h"
 
 Matrice::Matrice(int lignes, int colonnes) {
@@ -48,11 +49,61 @@ Matrice Matrice::multiplier(Matrice m2){
     return res;
 }
 
+Matrice Matrice::transposer(){
+    Matrice transposee(lignes, colonnes);
+    for (int i = 0; i <lignes; i++){
+        for (int j = 0; j < colonnes; j++){
+            transposee.getMatrice()[j][i] = getMatrice()[i][j];
+        }
+    }
+    return transposee;
+}
+
+
+Matrice Matrice::viewPort(float width, float heigth, float depth){
+    float dimX = width/8;
+    float dimY = heigth/8;
+    float dimW = width*3/4;
+    float dimH = heigth*3/4;
+    Matrice m = Matrice::matriceId();
+    m.getMatrice()[0][3] = dimX + dimW / 2.f;
+    m.getMatrice()[1][3] = dimY + dimH / 2.f;
+    m.getMatrice()[2][3] = depth / 2.f;
+
+    m.getMatrice()[0][0] = dimW / 2.f;
+    m.getMatrice()[1][1] = dimH / 2.f;
+    m.getMatrice()[2][2] = depth / 2.f;
+
+    return m;
+
+}
+Matrice Matrice::lookat(Vecteur eye, Vecteur centre, Vecteur up){
+    Vecteur z = (eye.moins(centre)).normalize();
+    Vecteur x = (up.normal(z)).normalize();
+    Vecteur y = (z.normal(x)).normalize();
+    Matrice minV(4,4);
+    minV = minV.matriceId();
+    for (int i = 0; i<3; i++){
+        minV.getMatrice()[0][i] = x.get(i);
+        minV.getMatrice()[1][i] = y.get(i);
+        minV.getMatrice()[2][i] = z.get(i);
+        minV.getMatrice()[i][3] = -centre.get(i);
+    }
+    return minV;
+
+}
+
+Matrice Matrice::projection(Vecteur eye, Vecteur center){
+    Matrice matrice = matriceId();
+    matrice.getMatrice()[3][2] = -1.f / ((eye.moins(center)).norme());
+    return matrice;
+}
+
 void Matrice::afficher() {
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
-            cout << matrice[i][j];
-            cout << " ";
+            std::cout << matrice[i][j];
+            std::cout << " ";
         }
         cout << " " << endl;
     }

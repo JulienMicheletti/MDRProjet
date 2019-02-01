@@ -53,10 +53,19 @@ TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3,
     return color;
 }
 
-float Dessin::interpolateIntensite(Vecteur v, pointf p1, pointf p2, pointf p3, pointf newPt){
-   newPt.intensite = p1.intensite * v.x + p2.intensite * v.y + p3.intensite * v.z;
 
-   return newPt.intensite;
+float Dessin::interpolateIntensite(Vecteur v, pointf newPt){
+    Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
+    normal.x /= 127;
+    normal.y /= 127;
+    normal.z /= 127;
+    normal.x -= 1;
+    normal.y -= 1;
+    normal.z -= 1;
+
+    Vecteur light(1, 1, 1);
+    light = light.normalize();
+    return normal.produitScal(light);
 }
 
 TGAColor Dessin::convertirIntensite(pointf pixel){
@@ -65,7 +74,9 @@ TGAColor Dessin::convertirIntensite(pointf pixel){
     return newColor;
 }
 
-void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, TGAImage &tgaImage) {
+
+
+void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, float *zbuffer, TGAImage &tgaImage, TGAImage &imageDiffuse) {
     vector <pointf> box = findbox(pt1, pt2, pt3);
     Vecteur v;
     float z;
@@ -81,7 +92,8 @@ void Dessin::settriangle(pointf pt1, pointf pt2, pointf pt3, TGAImage &image, fl
                 if (int(newPt.x + newPt.y * width) > 0 && zbuffer[int(newPt.x + newPt.y * width)] < newPt.z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
                     newPt.color = interpolateTriangle(v, pt1, pt2, pt3, tgaImage, newPt);
-                    newPt.intensite = interpolateIntensite(v, pt1, pt2, pt3, newPt);
+                    newPt.colorN = interpolateTriangle(v, pt1, pt2, pt3, imageDiffuse, newPt);
+                    newPt.intensite = interpolateIntensite(v, newPt);
                     if (newPt.intensite > 0) {
                         newPt.color = convertirIntensite(newPt);
                         image.set(newPt.x, newPt.y, newPt.color);

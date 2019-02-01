@@ -8,8 +8,11 @@
 #include <cstdio>
 #include <vector>
 #include <sstream>
-#include "Dessin.h"
-#include "Matrice.h"
+#include "Vecteur.h"
+
+
+using namespace std;
+
 
 class Matrice {
 protected:
@@ -17,7 +20,6 @@ protected:
     float **matrice;
     int lignes;
     int colonnes;
-    pointf pointf1;
     float c;
 
 public:
@@ -28,8 +30,11 @@ public:
     Matrice multiplier(Matrice m2);
     float **getMatrice();
     static Matrice matriceId();
-    pointf calculerMatrice();
     float getC();
+    static Matrice viewPort(float, float, float);
+    static Matrice projection(Vecteur eye, Vecteur center);
+    Matrice transposer();
+    static Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up);
 };
 
 
