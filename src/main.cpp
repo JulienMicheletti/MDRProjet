@@ -12,8 +12,12 @@
 #include "Matrice.h"
 #include <chrono>
 
-
+vector<vector<string> > points;
+vector<int> lignes;
+vector<vector<std::string> > textures;
+vector<vector<std::string> > intensite;
 using namespace std::chrono;
+
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
     std::vector<int> tab;
@@ -72,13 +76,6 @@ std::vector<vector<std::string> > readPoint(string filename, int type){
     return tab;
 }
 
-float getIntensite(Vecteur intensite) {
-    Vecteur light(1, 1, 1);
-    Vecteur normal = intensite.normalize();
-    light = light.normalize();
-    return normal.produitScal(light);
-
-}
 
 Matrice createCordMatrice(pointf p, Matrice matrice){
     matrice.getMatrice()[0][0] = p.x;
@@ -97,15 +94,23 @@ pointf m2v (Matrice m){
     return p;
 }
 
-void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<std::string> > textures,vector<vector<std::string> > intensite,  TGAImage &image, TGAImage &imagetga, TGAImage &imagenm) {
+void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
     vector<pointf> screen;
     Dessin dessin;
     pointf p;
+    matrices matrices;
 
     Matrice vp = Matrice::viewPort(800, 800, 255);
     Matrice projection = Matrice::projection(eye, center);
     Matrice modelView = Matrice::lookat(eye, center, up);
+    matrices.matrice_M = Matrice::matrice_M(projection, modelView);
+    matrices.matrice_MIT = Matrice::matrice_MIT(matrices.matrice_M);
     float *zbuffer = new float[width * heigth];
+
+    //modelView.afficher();
+    matrices.matrice_MIT.afficher();
+
+
 
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
@@ -115,36 +120,66 @@ void afficher(vector<vector<string> > points, vector<int> lignes, vector<vector<
             p = m2v(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p, matrice)));
             p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
             p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
-            //Vecteur inte(strtof(intensite[lignes[i - j]][2].c_str(), 0), strtof(intensite[lignes[i - j]][3].c_str(), 0), strtof(intensite[lignes[i - j]][4].c_str(), 0));
-            //p.intensite = getIntensite(inte);
             screen.push_back(p);
         }
-        high_resolution_clock::time_point t1 = high_resolution_clock::now();
-        dessin.settriangle(screen[0], screen[1], screen[2], image, zbuffer, imagetga, imagenm);
+        dessin.settriangle(screen, image, zbuffer, imagetga, imagenm, imagespec, matrices);
         screen.clear();
     }
 }
 
     int main(int ac, char **av) {
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+    Matrice matrice1(4,4);
+    matrice1.getMatrice()[0][0] = 5;
+    matrice1.getMatrice()[0][1] = 4;
+    matrice1.getMatrice()[0][2] = 8;
+    matrice1.getMatrice()[0][3] = 2;
+    matrice1.getMatrice()[1][0] = 7;
+    matrice1.getMatrice()[1][1] = 1;
+    matrice1.getMatrice()[1][2] = 3;
+    matrice1.getMatrice()[1][3] = 6;
+    matrice1.getMatrice()[2][0] = 9;
+    matrice1.getMatrice()[2][1] = 0;
+    matrice1.getMatrice()[2][2] = 2;
+    matrice1.getMatrice()[2][3] = 0;
+    matrice1.getMatrice()[3][0] = 4;
+    matrice1.getMatrice()[3][1] = 7;
+    matrice1.getMatrice()[3][2] = 5;
+    matrice1.getMatrice()[3][3] = 3;
+
+   float det = matrice1.determinant44();
+   matrice1.comatrice().transposer().inverser(det).afficher();
+//   matrice1.comatrice().afficher();
+   // matrice1.afficher();*/
+
         TGAImage image(800, 800, TGAImage::RGB);
         TGAImage imageDiffuse;
         TGAImage imageNm;
+        TGAImage imageSpec;
 
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_nm.tga";
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head.txt";
+        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_nm.tga";
+        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_spec.tga";
+
+        ::points = readPoint(filename, 0);
+        ::lignes = readLine(filename);
+        ::textures = readPoint(filename, 1);
+        ::intensite = readPoint(filename, 2);
+
+        high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
+        imageSpec.read_tga_file(filenameSpec);
+        imageSpec.flip_vertically();
         imageDiffuse.read_tga_file(filenameTGA);
         imageDiffuse.flip_vertically();
         imageNm.read_tga_file(nmTga);
         imageNm.flip_vertically();
-        afficher(readPoint(filename, 0), readLine(filename), readPoint(filename, 1),  readPoint(filename, 2), image, imageDiffuse, imageNm);
+        afficher(image, imageDiffuse, imageNm, imageSpec);
         image.flip_vertically();
         image.write_tga_file("output.tga");
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
         auto duration = duration_cast<microseconds> (t2-t1).count();
         cout << duration;
-
 
         return 0;
     }
