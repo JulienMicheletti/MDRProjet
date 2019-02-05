@@ -68,7 +68,6 @@ Matrice Matrice::multiplier(Matrice m2){
 }
 
 Matrice Matrice::transposer(){
-    cout << lignes << endl;
     Matrice transposee(lignes, colonnes);
     for (int i = 0; i < lignes; i++){
         for (int j = 0; j < colonnes; j++){
@@ -130,7 +129,6 @@ Matrice Matrice::comatrice(){
         }
     }
     return comatrice;
-   // inverse.afficher();
 }
 
 Matrice Matrice::inverser(float det){
@@ -141,7 +139,6 @@ Matrice Matrice::inverser(float det){
         }
     }
     return inverse;
-    // inverse.afficher();
 }
 
 Matrice Matrice::concat(int x, int y){

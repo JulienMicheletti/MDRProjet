@@ -107,11 +107,6 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     matrices.matrice_MIT = Matrice::matrice_MIT(matrices.matrice_M);
     float *zbuffer = new float[width * heigth];
 
-    //modelView.afficher();
-    matrices.matrice_MIT.afficher();
-
-
-
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
             p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
@@ -128,7 +123,7 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
 }
 
     int main(int ac, char **av) {
-    Matrice matrice1(4,4);
+    /*Matrice matrice1(4,4);
     matrice1.getMatrice()[0][0] = 5;
     matrice1.getMatrice()[0][1] = 4;
     matrice1.getMatrice()[0][2] = 8;
@@ -148,6 +143,7 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
 
    float det = matrice1.determinant44();
    matrice1.comatrice().transposer().inverser(det).afficher();
+
 //   matrice1.comatrice().afficher();
    // matrice1.afficher();*/
 
@@ -156,9 +152,9 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         TGAImage imageNm;
         TGAImage imageSpec;
 
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_nm.tga";
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo.txt";
+        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_nm.tga";
         const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_spec.tga";
 
         ::points = readPoint(filename, 0);
@@ -176,7 +172,7 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         imageNm.flip_vertically();
         afficher(image, imageDiffuse, imageNm, imageSpec);
         image.flip_vertically();
-        image.write_tga_file("output.tga");
+        image.write_tga_file("output2.tga");
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
         auto duration = duration_cast<microseconds> (t2-t1).count();
         cout << duration;

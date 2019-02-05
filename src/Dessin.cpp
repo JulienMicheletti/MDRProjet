@@ -144,7 +144,7 @@ void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer,
                     zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
                     newPt.color = interpolateTriangle(v, screen[0], screen[1], screen[2], tgaImage, newPt);
                     newPt.colorN = interpolateTriangle(v, screen[0], screen[1], screen[2], imageDiffuse, newPt);
-                    newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], imageSpec, newPt);
+                  //  newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], imageSpec, newPt);
                     newPt.intensite = interpolateIntensite(newPt, matrices);
                   //  interpolateSpec(newPt);
                     newPt.color = convertirIntensite(newPt);
