@@ -58,30 +58,27 @@ TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3,
     return color;
 }
 
+Vecteur Dessin::matriceTovecteur(Matrice m){
+    Vecteur v;
+    v.x = m.getMatrice()[0][0];
+    v.y = m.getMatrice()[1][0];
+    v.z = m.getMatrice()[2][0];
+    return v;
+}
+
 
 float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
     Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
-    Vecteur r;
     Matrice m(4,1);
-    normal.x /= 127;
-    normal.y /= 127;
-    normal.z /= 127;
-    normal.x -= 1;
-    normal.y -= 1;
-    normal.z -= 1;
+    normal = Vecteur::convertirRGB(normal);
     m = m.convertir(normal);
     m = matrice.matrice_MIT.multiplier(m);
-    n.x = m.getMatrice()[0][0];
-    n.y = m.getMatrice()[1][0];
-    n.z = m.getMatrice()[2][0];
+    n = matriceTovecteur(m);
 
-    Vecteur light(0, 0, 1);
 
     m = m.convertir(light);
     m = matrice.matrice_M.multiplier(m);
-    l.x = m.getMatrice()[0][0];
-    l.y = m.getMatrice()[1][0];
-    l.z = m.getMatrice()[2][0];
+    l = matriceTovecteur(m);
     l = l.normalize();
 
     return  max(n.produitScal(l), 0.0f);
@@ -90,10 +87,7 @@ float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
 void Dessin::interpolateSpec(pointf newPt) {
     Vecteur spec(newPt.colorSpec.bgra[2], newPt.colorSpec.bgra[1], newPt.colorSpec.bgra[0]);
     float scal = n.produitScal(l) * 2.f;
-    Vecteur r;
-    r.x = n.x * scal;
-    r.y = n.y * scal;
-    r.z = n.z * scal;
+    Vecteur r = n.mult(scal);
     r = r.moins(l).normalize();
     specf = pow(max(r.z, 0.0f), spec.z);
     diff = max(0.f, n.produitScal(l));

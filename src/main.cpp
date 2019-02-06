@@ -123,30 +123,6 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
 }
 
     int main(int ac, char **av) {
-    /*Matrice matrice1(4,4);
-    matrice1.getMatrice()[0][0] = 5;
-    matrice1.getMatrice()[0][1] = 4;
-    matrice1.getMatrice()[0][2] = 8;
-    matrice1.getMatrice()[0][3] = 2;
-    matrice1.getMatrice()[1][0] = 7;
-    matrice1.getMatrice()[1][1] = 1;
-    matrice1.getMatrice()[1][2] = 3;
-    matrice1.getMatrice()[1][3] = 6;
-    matrice1.getMatrice()[2][0] = 9;
-    matrice1.getMatrice()[2][1] = 0;
-    matrice1.getMatrice()[2][2] = 2;
-    matrice1.getMatrice()[2][3] = 0;
-    matrice1.getMatrice()[3][0] = 4;
-    matrice1.getMatrice()[3][1] = 7;
-    matrice1.getMatrice()[3][2] = 5;
-    matrice1.getMatrice()[3][3] = 3;
-
-   float det = matrice1.determinant44();
-   matrice1.comatrice().transposer().inverser(det).afficher();
-
-//   matrice1.comatrice().afficher();
-   // matrice1.afficher();*/
-
         TGAImage image(800, 800, TGAImage::RGB);
         TGAImage imageDiffuse;
         TGAImage imageNm;

@@ -36,6 +36,16 @@ Vecteur::Vecteur(float x, float y, float z){
         return Vecteur(x / num, y / num, z / num);
     }
 
+Vecteur Vecteur::moinsF (float num)
+{
+    return Vecteur(x - num, y - num, z - num);
+}
+
+Vecteur Vecteur::mult (float num)
+{
+    return Vecteur(x * num, y * num, z * num);
+}
+
     Vecteur Vecteur::normal(Vecteur v){
         Vecteur n;
 
@@ -46,6 +56,11 @@ Vecteur::Vecteur(float x, float y, float z){
         return n;
     }
 
+    Vecteur Vecteur::convertirRGB(Vecteur v){
+        v = v.div(127);
+        v = v.moinsF(1);
+        return v;
+}
 
     float Vecteur::produitScal(Vecteur v){
 

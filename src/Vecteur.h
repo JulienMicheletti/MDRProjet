@@ -18,11 +18,14 @@ public:
     Vecteur(float x, float y, float z);
     Vecteur plus(Vecteur v);
     Vecteur div (float num);
+    Vecteur moinsF (float num);
+    Vecteur mult (float num);
     Vecteur normal(Vecteur v);
     float produitScal(Vecteur v);
     float get(int i);
     Vecteur moins(Vecteur);
     float norme();
+    static Vecteur convertirRGB(Vecteur v);
     Vecteur normalize();
 
 };

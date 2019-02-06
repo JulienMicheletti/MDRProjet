@@ -43,6 +43,7 @@ const Matrice matrice(4,4);
 const Vecteur eye(1, 1, 3);
 const Vecteur center(0, 0, 0);
 const Vecteur up(0, 1, 0);
+const Vecteur light(0, 0, 1);
 using namespace std;
 
 class Dessin {
@@ -56,6 +57,7 @@ public:
     TGAColor convertirIntensite(pointf pixel);
     void settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer, TGAImage &image1, TGAImage &imageDiffuse, TGAImage &imageSpec, matrices matrice);
     void interpolateSpec(pointf newPt);
+    Vecteur matriceTovecteur(Matrice m);
 };
 
 
