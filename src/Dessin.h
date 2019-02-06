@@ -55,7 +55,7 @@ public:
     float interpolateIntensite(pointf newPt, matrices);
     TGAColor convertirIntensite(pointf pixel);
     void settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer, TGAImage &image1, TGAImage &imageDiffuse, TGAImage &imageSpec, matrices matrice);
-    float interpolateSpec(pointf newPt);
+    void interpolateSpec(pointf newPt);
 };
 
 

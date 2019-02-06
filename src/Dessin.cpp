@@ -4,6 +4,11 @@
 
 #include "Dessin.h"
 
+Vecteur n;
+Vecteur l;
+float diff;
+float specf;
+
 Dessin::Dessin(){}
 
 Vecteur Dessin::barycentrique(pointf p, pointf p1, pointf p2, pointf p3){
@@ -56,8 +61,6 @@ TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3,
 
 float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
     Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
-    Vecteur n;
-    Vecteur l;
     Vecteur r;
     Matrice m(4,1);
     normal.x /= 127;
@@ -84,39 +87,16 @@ float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
     return  max(n.produitScal(l), 0.0f);
 }
 
-float Dessin::interpolateSpec(pointf newPt) {
-    Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
+void Dessin::interpolateSpec(pointf newPt) {
     Vecteur spec(newPt.colorSpec.bgra[2], newPt.colorSpec.bgra[1], newPt.colorSpec.bgra[0]);
-
-    normal.x /= 127;
-    normal.y /= 127;
-    normal.z /= 127;
-    normal.x -= 1;
-    normal.y -= 1;
-    normal.z -= 1;
-
- /*   spec.x /= 127;
-    spec.y /= 127;
-    spec.z /= 127;
-    spec.x -= 1;
-    spec.y -= 1;
-    spec.z -= 1;*/
-
-    Vecteur light(1, 1, 1);
-    light = light.normalize();
-    Vecteur mult = normal.normal(light);
-    mult.x *= 2.f;
-    mult.y *=2.f;
-    mult.z *=2.f;
-   Vecteur r = normal.normal(mult).moins(light).normalize();
-    float specf = pow(std::max(r.z, 0.0f), spec.z);
-   //cout << specf << endl;
- /* cout << " ";
-    cout << spec.y;
-    cout << " ";
-    cout << spec.z << endl;*/
-
-
+    float scal = n.produitScal(l) * 2.f;
+    Vecteur r;
+    r.x = n.x * scal;
+    r.y = n.y * scal;
+    r.z = n.z * scal;
+    r = r.moins(l).normalize();
+    specf = pow(max(r.z, 0.0f), spec.z);
+    diff = max(0.f, n.produitScal(l));
 }
 
 
@@ -144,10 +124,14 @@ void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer,
                     zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
                     newPt.color = interpolateTriangle(v, screen[0], screen[1], screen[2], tgaImage, newPt);
                     newPt.colorN = interpolateTriangle(v, screen[0], screen[1], screen[2], imageDiffuse, newPt);
-                  //  newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], imageSpec, newPt);
+                    newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], imageSpec, newPt);
                     newPt.intensite = interpolateIntensite(newPt, matrices);
-                  //  interpolateSpec(newPt);
-                    newPt.color = convertirIntensite(newPt);
+                    interpolateSpec(newPt);
+                    TGAColor color = convertirIntensite(newPt);
+                    newPt.color = color;
+                    for (int i=0; i<3; i++){
+                        newPt.color[i] = std::min<float>(5 + color[i]*(diff + .6*specf), 255);
+                    }
                     image.set(newPt.x, newPt.y, newPt.color);
               }
             }

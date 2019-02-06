@@ -152,9 +152,9 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         TGAImage imageNm;
         TGAImage imageSpec;
 
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_nm.tga";
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head.txt";
+        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_nm.tga";
         const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\african_head_spec.tga";
 
         ::points = readPoint(filename, 0);
