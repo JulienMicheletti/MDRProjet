@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "Matrice.h"
 
 
@@ -12,7 +13,7 @@ Matrice matrice5(2,2);
 Matrice matrice6(2,2);
 Matrice matrice7(2,2);
 
-Matrice::Matrice(){
+Matrice::Matrice() : matrice(matrice){
     this->colonnes = 4;
     this->lignes = 4;
     matrice = new float*[colonnes];
@@ -23,6 +24,7 @@ Matrice::Matrice(int lignes, int colonnes) {
     this->colonnes = colonnes;
     this->lignes = lignes;
     matrice = new float*[colonnes];
+
     for(int i = 0;i < lignes; i++) matrice[i] = new float[lignes];
 
 }

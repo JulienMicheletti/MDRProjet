@@ -89,7 +89,7 @@ void Dessin::interpolateSpec(pointf newPt) {
     float scal = n.produitScal(l) * 2.f;
     Vecteur r = n.mult(scal);
     r = r.moins(l).normalize();
-    specf = pow(max(r.z, 0.0f), spec.z);
+    specf = pow(max(r.z, 1.f), spec.z);
     diff = max(0.f, n.produitScal(l));
 }
 

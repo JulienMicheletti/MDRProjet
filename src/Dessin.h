@@ -19,6 +19,7 @@
 
 
 struct pointf {
+    Vecteur coord;
     float x;
     float y;
     float z;
@@ -43,7 +44,7 @@ const Matrice matrice(4,4);
 const Vecteur eye(1, 1, 3);
 const Vecteur center(0, 0, 0);
 const Vecteur up(0, 1, 0);
-const Vecteur light(0, 0, 1);
+const Vecteur light(1,1,1);
 using namespace std;
 
 class Dessin {
