@@ -40,7 +40,6 @@ const int heigth = 800;
 const int depth = 255;
 const Matrice matrice(4,4);
 
-const Vecteur eye(1, 1, 3);
 const Vecteur center(0, 0, 0);
 const Vecteur up(0, 1, 0);
 const Vecteur light(1,1,1);

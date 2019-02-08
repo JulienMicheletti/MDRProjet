@@ -17,6 +17,7 @@ vector<int> lignes;
 vector<vector<std::string> > textures;
 vector<vector<std::string> > intensite;
 using namespace std::chrono;
+Vecteur eye(1, 1, 3);
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -123,8 +124,7 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
 }
 
     int main(int ac, char **av) {
-        TGAImage image(800, 800, TGAImage::RGB);
-        TGAImage imageDiffuse;
+         TGAImage imageDiffuse;
         TGAImage imageNm;
         TGAImage imageSpec;
 
@@ -148,9 +148,11 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         imageDiffuse.flip_vertically();
         imageNm.read_tga_file(nmTga);
         imageNm.flip_vertically();
+        TGAImage image(800, 800, TGAImage::RGB);
         afficher(image, imageDiffuse, imageNm, imageSpec);
         image.flip_vertically();
         image.write_tga_file("output2.tga");
+
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
         auto duration = duration_cast<microseconds> (t2-t1).count();
         cout << duration;

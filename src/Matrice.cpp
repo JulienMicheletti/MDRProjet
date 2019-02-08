@@ -13,7 +13,7 @@ Matrice matrice5(2,2);
 Matrice matrice6(2,2);
 Matrice matrice7(2,2);
 
-Matrice::Matrice(){
+Matrice::Matrice() : matrice(matrice){
     this->colonnes = 4;
     this->lignes = 4;
     matrice = new float*[colonnes];
