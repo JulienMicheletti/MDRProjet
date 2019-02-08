@@ -42,7 +42,7 @@ public:
     Matrice comatrice();
     Matrice inverser(float);
     static Matrice matrice_M(Matrice projection, Matrice modelView);
-    Matrice convertir(Vecteur);
+    void convertir(Vecteur);
     static Matrice matrice_MIT(Matrice matrice_M);
     Matrice concat(int, int);
     static Matrice lookat(Vecteur eye, Vecteur centre, Vecteur up);

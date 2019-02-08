@@ -128,10 +128,12 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         TGAImage imageNm;
         TGAImage imageSpec;
 
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_nm.tga";
-        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet\\diablo3_pose_spec.tga";
+        const char *filenameTGA = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_diffuse.tga";
+        string filename = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo.txt";
+        const char *nmTga = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_nm.tga";
+        const char *filenameSpec = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_spec.tga";
+
+
 
         ::points = readPoint(filename, 0);
         ::lignes = readLine(filename);

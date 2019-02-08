@@ -13,7 +13,7 @@ Matrice matrice5(2,2);
 Matrice matrice6(2,2);
 Matrice matrice7(2,2);
 
-Matrice::Matrice() : matrice(matrice){
+Matrice::Matrice(){
     this->colonnes = 4;
     this->lignes = 4;
     matrice = new float*[colonnes];
@@ -25,8 +25,7 @@ Matrice::Matrice(int lignes, int colonnes) {
     this->lignes = lignes;
     matrice = new float*[colonnes];
 
-    for(int i = 0;i < lignes; i++) matrice[i] = new float[lignes];
-
+   for(int i = 0;i < lignes; i++) matrice[i] = new float[lignes];
 }
 
 Matrice Matrice::matriceId() {
@@ -114,7 +113,9 @@ Matrice Matrice::lookat(Vecteur eye, Vecteur centre, Vecteur up){
 }
 
 Matrice Matrice::matrice_M(Matrice projection, Matrice modelView){
-    return projection.multiplier(modelView);
+    Matrice M(4,4);
+    M = projection.multiplier(modelView);
+    return M;
 }
 
 Matrice Matrice::matrice_MIT(Matrice matrice_M){
@@ -163,12 +164,10 @@ Matrice Matrice::concat(int x, int y){
     return matrice;
 }
 
-Matrice Matrice::convertir(Vecteur v){
-    Matrice matrice(4,1);
-    matrice.getMatrice()[0][0] = v.x;
-    matrice.getMatrice()[1][0] = v.y;
-    matrice.getMatrice()[2][0] = v.z;
-    return matrice;
+void Matrice::convertir(Vecteur v){
+    getMatrice()[0][0] = v.x;
+    getMatrice()[1][0] = v.y;
+    getMatrice()[2][0] = v.z;
 }
 
 float Matrice::determinant33(){

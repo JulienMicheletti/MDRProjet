@@ -19,7 +19,6 @@
 
 
 struct pointf {
-    Vecteur coord;
     float x;
     float y;
     float z;

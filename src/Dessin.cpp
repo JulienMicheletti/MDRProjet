@@ -69,14 +69,14 @@ Vecteur Dessin::matriceTovecteur(Matrice m){
 
 float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
     Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
-    Matrice m(4,1);
+    Matrice m(4,4);
     normal = Vecteur::convertirRGB(normal);
-    m = m.convertir(normal);
+    m.convertir(normal);
     m = matrice.matrice_MIT.multiplier(m);
     n = matriceTovecteur(m);
 
 
-    m = m.convertir(light);
+    m.convertir(light);
     m = matrice.matrice_M.multiplier(m);
     l = matriceTovecteur(m);
     l = l.normalize();
