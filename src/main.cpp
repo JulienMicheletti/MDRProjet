@@ -11,6 +11,7 @@
 #include "Dessin.h"
 #include "Matrice.h"
 #include <chrono>
+#include <cstring>
 
 vector<vector<string> > points;
 vector<int> lignes;
@@ -124,15 +125,14 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
 }
 
     int main(int ac, char **av) {
-         TGAImage imageDiffuse;
+  /*  TGAImage imageDiffuse;
         TGAImage imageNm;
         TGAImage imageSpec;
 
-        const char *filenameTGA = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_diffuse.tga";
-        string filename = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo.txt";
-        const char *nmTga = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_nm.tga";
-        const char *filenameSpec = "/home/profil/michele19u/CLionProjects/MoteurRenduProjet2/diablo3_pose_spec.tga";
-
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo.txt";
+        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_nm.tga";
+        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_spec.tga";
 
 
         ::points = readPoint(filename, 0);
@@ -148,14 +148,50 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
         imageDiffuse.flip_vertically();
         imageNm.read_tga_file(nmTga);
         imageNm.flip_vertically();
-        TGAImage image(800, 800, TGAImage::RGB);
-        afficher(image, imageDiffuse, imageNm, imageSpec);
-        image.flip_vertically();
-        image.write_tga_file("output2.tga");
+        float k = -6;
+      while (k <= 6){
+            Vecteur eye2(k, 1, 6);
+            eye = eye2;
+            TGAImage image(800, 800, TGAImage::RGB);
+            afficher(image, imageDiffuse, imageNm, imageSpec);
+            char integer_string[32];
 
-        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+            sprintf(integer_string, "%f", k);
+            char other_string[64] = "output"; // make sure you allocate enough space to append the other string
+            char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
+
+            strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
+            strcat(other_string, other_string2);
+            image.flip_vertically();
+            image.write_tga_file(other_string);
+
+        }
+
+
+*/
+
+        float k = -6;
+        while (k <= 6){
+           TGAImage imageAnim(800, 800, TGAImage::RGB);
+            //afficher(image, imageDiffuse, imageNm, imageSpec);
+            char integer_string[32];
+
+            sprintf(integer_string, "%f", k);
+            char other_string[64] = "output"; // make sure you allocate enough space to append the other string
+            char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
+
+            strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
+            strcat(other_string, other_string2);
+
+            imageAnim.read_tga_file(other_string);
+           // imageAnim.flip_vertically();
+            imageAnim.write_tga_file("outputanim.tga");
+            k+=0.5;
+        }
+
+     /*   high_resolution_clock::time_point t2 = high_resolution_clock::now();
         auto duration = duration_cast<microseconds> (t2-t1).count();
-        cout << duration;
+        cout << duration;*/
 
         return 0;
     }
