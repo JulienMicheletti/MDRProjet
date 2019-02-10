@@ -51,8 +51,8 @@ vector<pointf> Dessin::findbox(pointf pt1, pointf pt2, pointf pt3){
 TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
     TGAColor color;
 
-    newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*1024;
-    newPt.colorY = (p1.colorY * v.x + p2.colorY * v.y + p3.colorY * v.z)*1024;
+    newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*image.get_width();
+    newPt.colorY = (p1.colorY * v.x + p2.colorY * v.y + p3.colorY * v.z)*image.get_width();//256;//1024;
 
     color = image.get(newPt.colorX, newPt.colorY);
     return color;
@@ -89,7 +89,7 @@ void Dessin::interpolateSpec(pointf newPt) {
     float scal = n.produitScal(l) * 2.f;
     Vecteur r = n.mult(scal);
     r = r.moins(l).normalize();
-    specf = pow(max(r.z, 1.f), spec.z);
+    specf = pow(max(r.z, 0.f), spec.z);
     diff = max(0.f, n.produitScal(l));
 }
 
@@ -123,11 +123,11 @@ void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer,
                     interpolateSpec(newPt);
                     TGAColor color = convertirIntensite(newPt);
                     newPt.color = color;
-                    for (int i=0; i<3; i++){
-                        newPt.color[i] = std::min<float>(5 + color[i]*(diff + .6*specf), 255);
+                    for (int i = 0; i < 3; i++) {
+                        newPt.color[i] = std::min<float>(5 + color[i] * (diff + .6 * specf), 255);
                     }
                     image.set(newPt.x, newPt.y, newPt.color);
-              }
+                }
             }
         }
     }

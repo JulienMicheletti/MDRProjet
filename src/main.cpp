@@ -96,6 +96,28 @@ pointf m2v (Matrice m){
     return p;
 }
 
+vector<TGAImage> load_texture(char **tab, int ind){
+    vector<TGAImage> imgs;
+    char *filename;
+    for (int i = 1; i < ind; i++) {
+        TGAImage image;
+        if (strcmp(tab[i], "african_head.txt") != 0 && strcmp(tab[i], "african_eye_inner.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
+            filename = tab[i];
+            image.read_tga_file(filename);
+            image.flip_vertically();
+            imgs.push_back(image);
+        }
+    }
+    return imgs;
+}
+
+void load_txt(char * filename){
+    ::points = readPoint(filename, 0);
+    ::lignes = readLine(filename);
+    ::textures = readPoint(filename, 1);
+    ::intensite = readPoint(filename, 2);
+
+}
 void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
     vector<pointf> screen;
     Dessin dessin;
@@ -124,15 +146,39 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     }
 }
 
+int main(int ac, char **av) {
+    TGAImage image(800, 800, TGAImage::RGB);
+    vector<TGAImage> imgs;
+
+    imgs = load_texture(av, ac);
+
+
+    load_txt(av[1]);
+    afficher(image, imgs[0], imgs[1], imgs[2]);
+/*load_txt(av[2]);
+    afficher(image, imgs[3], imgs[4], imgs[5]);
+   /* load_txt(av[3]);
+    afficher(image, imgs[6], imgs[7], imgs[8]);*/
+
+
+    image.flip_vertically();
+    image.write_tga_file("output2.tga");
+
+    return 0;
+}
+
+
+    /*
+     *
     int main(int ac, char **av) {
-  /*  TGAImage imageDiffuse;
+    TGAImage imageDiffuse;
         TGAImage imageNm;
         TGAImage imageSpec;
 
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_nm.tga";
-        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\diablo3_pose_spec.tga";
+        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_diffuse.tga";
+        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head.txt";
+        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_nm.tga";
+        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_spec.tga";
 
 
         ::points = readPoint(filename, 0);
@@ -164,13 +210,13 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
             strcat(other_string, other_string2);
             image.flip_vertically();
             image.write_tga_file(other_string);
-
+            k+=0.5;
         }
 
 
-*/
 
-        float k = -6;
+
+     /*   float k = -6;
         while (k <= 6){
            TGAImage imageAnim(800, 800, TGAImage::RGB);
             //afficher(image, imageDiffuse, imageNm, imageSpec);
@@ -187,11 +233,8 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
            // imageAnim.flip_vertically();
             imageAnim.write_tga_file("outputanim.tga");
             k+=0.5;
-        }
+        }*/
 
-     /*   high_resolution_clock::time_point t2 = high_resolution_clock::now();
-        auto duration = duration_cast<microseconds> (t2-t1).count();
-        cout << duration;*/
-
-        return 0;
-    }
+/*   high_resolution_clock::time_point t2 = high_resolution_clock::now();
+   auto duration = duration_cast<microseconds> (t2-t1).count();
+   cout << duration;*/
