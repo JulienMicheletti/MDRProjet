@@ -18,7 +18,7 @@ vector<int> lignes;
 vector<vector<std::string> > textures;
 vector<vector<std::string> > intensite;
 using namespace std::chrono;
-Vecteur eye(1, 1, 3);
+Vecteur eye(1,1,3);
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -160,6 +160,26 @@ int main(int ac, char **av) {
    /* load_txt(av[3]);
     afficher(image, imgs[6], imgs[7], imgs[8]);*/
 
+  /*  float k = -6;
+    float i = 6.5;
+    while (k <= 6){
+        Vecteur eye2(k, 1, -6);
+        eye = eye2;
+        TGAImage image(800, 800, TGAImage::RGB);
+        afficher(image, imgs[0], imgs[1], imgs[2]);
+        char integer_string[32];
+
+        sprintf(integer_string, "%f", i);
+        char other_string[64] = "output"; // make sure you allocate enough space to append the other string
+        char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
+
+        strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
+        strcat(other_string, other_string2);
+        image.flip_vertically();
+        image.write_tga_file(other_string);
+        i+=0.5;
+        k+=0.5;
+    }*/
 
     image.flip_vertically();
     image.write_tga_file("output2.tga");
@@ -167,74 +187,3 @@ int main(int ac, char **av) {
     return 0;
 }
 
-
-    /*
-     *
-    int main(int ac, char **av) {
-    TGAImage imageDiffuse;
-        TGAImage imageNm;
-        TGAImage imageSpec;
-
-        const char *filenameTGA = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_diffuse.tga";
-        string filename = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head.txt";
-        const char *nmTga = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_nm.tga";
-        const char *filenameSpec = "C:\\Users\\Julien\\CLionProjects\\MoteurRenduProjet2\\african_head_spec.tga";
-
-
-        ::points = readPoint(filename, 0);
-        ::lignes = readLine(filename);
-        ::textures = readPoint(filename, 1);
-        ::intensite = readPoint(filename, 2);
-
-        high_resolution_clock::time_point t1 = high_resolution_clock::now();
-
-        imageSpec.read_tga_file(filenameSpec);
-        imageSpec.flip_vertically();
-        imageDiffuse.read_tga_file(filenameTGA);
-        imageDiffuse.flip_vertically();
-        imageNm.read_tga_file(nmTga);
-        imageNm.flip_vertically();
-        float k = -6;
-      while (k <= 6){
-            Vecteur eye2(k, 1, 6);
-            eye = eye2;
-            TGAImage image(800, 800, TGAImage::RGB);
-            afficher(image, imageDiffuse, imageNm, imageSpec);
-            char integer_string[32];
-
-            sprintf(integer_string, "%f", k);
-            char other_string[64] = "output"; // make sure you allocate enough space to append the other string
-            char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
-
-            strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
-            strcat(other_string, other_string2);
-            image.flip_vertically();
-            image.write_tga_file(other_string);
-            k+=0.5;
-        }
-
-
-
-
-     /*   float k = -6;
-        while (k <= 6){
-           TGAImage imageAnim(800, 800, TGAImage::RGB);
-            //afficher(image, imageDiffuse, imageNm, imageSpec);
-            char integer_string[32];
-
-            sprintf(integer_string, "%f", k);
-            char other_string[64] = "output"; // make sure you allocate enough space to append the other string
-            char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
-
-            strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
-            strcat(other_string, other_string2);
-
-            imageAnim.read_tga_file(other_string);
-           // imageAnim.flip_vertically();
-            imageAnim.write_tga_file("outputanim.tga");
-            k+=0.5;
-        }*/
-
-/*   high_resolution_clock::time_point t2 = high_resolution_clock::now();
-   auto duration = duration_cast<microseconds> (t2-t1).count();
-   cout << duration;*/
