@@ -12,14 +12,14 @@
 #include "Matrice.h"
 #include <chrono>
 #include <cstring>
-#include <zconf.h>
 
 vector<vector<string> > points;
 vector<int> lignes;
 vector<vector<std::string> > textures;
 vector<vector<std::string> > intensite;
+Vecteur eye(1, 1, 3);
 using namespace std::chrono;
-Vecteur eye(0,1,3);
+float *zbuffer;
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -97,30 +97,7 @@ pointf m2v (Matrice m){
     return p;
 }
 
-vector<TGAImage> load_texture(char **tab, int ind){
-    vector<TGAImage> imgs;
-    char *filename;
-    for (int i = 1; i < ind; i++) {
-        TGAImage image;
-        if (strcmp(tab[i], "african_head.txt") != 0 && strcmp(tab[i], "eye.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
-            filename = tab[i];
-            image.read_tga_file(filename);
-            image.flip_vertically();
-            imgs.push_back(image);
-        }
-    }
-    return imgs;
-}
-
-void load_txt(char * filename){
-    ::points = readPoint(filename, 0);
-    ::lignes = readLine(filename);
-    ::textures = readPoint(filename, 1);
-    ::intensite = readPoint(filename, 2);
-
-}
-
-void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec, float *zbuffer) {
+void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
     vector<pointf> screen;
     Dessin dessin;
     pointf p;
@@ -131,6 +108,7 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     Matrice modelView = Matrice::lookat(eye, center, up);
     matrices.matrice_M = Matrice::matrice_M(projection, modelView);
     matrices.matrice_MIT = Matrice::matrice_MIT(matrices.matrice_M);
+
 
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
@@ -147,22 +125,58 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     }
 }
 
+vector<TGAImage> chargerTextures(string filename){
+    vector<TGAImage> imgs;
+    points = readPoint(filename, 0);
+    lignes = readLine(filename);
+    textures = readPoint(filename, 1);
+    intensite = readPoint(filename, 2);
+    TGAImage image1;
+    TGAImage image2;
+    TGAImage image3;
+
+    string name = filename + "_diffuse.tga";
+    string name2 = filename + "_nm.tga";
+    string name3 = filename + "_spec.tga";
+
+    image1.read_tga_file(name.c_str());
+    image1.flip_vertically();
+    image2.read_tga_file(name2.c_str());
+    image2.flip_vertically();
+    image3.read_tga_file(name3.c_str());
+    image3.flip_vertically();
+
+    imgs.push_back(image1);
+    imgs.push_back(image2);
+    imgs.push_back(image3);
+    return imgs;
+}
+
+void cleanTexture(vector<TGAImage> texts){
+    for (TGAImage image : texts){
+        image.clear();
+    }
+}
+
 int main(int ac, char **av) {
     TGAImage image(800, 800, TGAImage::RGB);
-    vector<TGAImage> imgs;
+    vector <TGAImage> imgs;
 
-    imgs = load_texture(av, ac);
+   zbuffer = new float[width * heigth];
+   for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
 
-    float *zbuffer = new float[width*heigth];
-    for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
+    imgs = chargerTextures(string(av[1]));
+    afficher(image, imgs[0], imgs[1], imgs[2]);
+    cleanTexture(imgs);
+    imgs.clear();
 
-    load_txt(av[1]);
-    afficher(image, imgs[0], imgs[1], imgs[2], zbuffer);
-    load_txt(av[2]);
-    afficher(image, imgs[3], imgs[4], imgs[5], zbuffer);
+    imgs = chargerTextures(string(av[2]));
+    afficher(image, imgs[0], imgs[1], imgs[2]);
+
+
     image.flip_vertically();
     image.write_tga_file("output2.tga");
     delete [] zbuffer;
+
     return 0;
 }
-

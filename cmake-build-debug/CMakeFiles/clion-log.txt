@@ -1,6 +1,6 @@
-/opt/michele19u/Espace-Etudiant/IA/clion-2018.3.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/profil/michele19u/CLionProjects/MoteurRenduProjet3
--- The C compiler identification is GNU 4.8.4
--- The CXX compiler identification is GNU 4.8.4
+/home/julien/clion-2018.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/julien/CLionProjects/MoteurRenduProjet3
+-- The C compiler identification is GNU 7.3.0
+-- The CXX compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/profil/michele19u/CLionProjects/MoteurRenduProjet3/cmake-build-debug
+-- Build files have been written to: /home/julien/CLionProjects/MoteurRenduProjet3/cmake-build-debug
