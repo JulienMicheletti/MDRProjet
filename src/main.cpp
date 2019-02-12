@@ -19,8 +19,7 @@ vector<int> lignes;
 vector<vector<std::string> > textures;
 vector<vector<std::string> > intensite;
 using namespace std::chrono;
-Vecteur eye(1,1,3);
-float *zbuffer;
+Vecteur eye(0,1,3);
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -121,7 +120,7 @@ void load_txt(char * filename){
 
 }
 
-void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
+void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec, float *zbuffer) {
     vector<pointf> screen;
     Dessin dessin;
     pointf p;
@@ -154,17 +153,16 @@ int main(int ac, char **av) {
 
     imgs = load_texture(av, ac);
 
-
-    zbuffer = new float[width * heigth];
+    float *zbuffer = new float[width*heigth];
     for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
-    load_txt(av[1]);
-    afficher(image, imgs[0], imgs[1], imgs[2]);
-    load_txt(av[2]);
-    afficher(image, imgs[3], imgs[4], imgs[5]);
 
+    load_txt(av[1]);
+    afficher(image, imgs[0], imgs[1], imgs[2], zbuffer);
+    load_txt(av[2]);
+    afficher(image, imgs[3], imgs[4], imgs[5], zbuffer);
     image.flip_vertically();
     image.write_tga_file("output2.tga");
-
+    delete [] zbuffer;
     return 0;
 }
 
