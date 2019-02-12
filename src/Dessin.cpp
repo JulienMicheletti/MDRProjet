@@ -102,6 +102,7 @@ TGAColor Dessin::convertirIntensite(pointf pixel){
 
 
 void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer, TGAImage &tgaImage, TGAImage &imageDiffuse, TGAImage &imageSpec, matrices matrices) {
+
     vector <pointf> box = findbox(screen[0], screen[1], screen[2]);
     Vecteur v;
     float z;

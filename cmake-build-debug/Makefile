@@ -177,6 +177,33 @@ src/Matrice.cpp.s:
 	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Matrice.cpp.s
 .PHONY : src/Matrice.cpp.s
 
+src/Modele.o: src/Modele.cpp.o
+
+.PHONY : src/Modele.o
+
+# target to build an object file
+src/Modele.cpp.o:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Modele.cpp.o
+.PHONY : src/Modele.cpp.o
+
+src/Modele.i: src/Modele.cpp.i
+
+.PHONY : src/Modele.i
+
+# target to preprocess a source file
+src/Modele.cpp.i:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Modele.cpp.i
+.PHONY : src/Modele.cpp.i
+
+src/Modele.s: src/Modele.cpp.s
+
+.PHONY : src/Modele.s
+
+# target to generate assembly for a file
+src/Modele.cpp.s:
+	$(MAKE) -f CMakeFiles/MProjet.dir/build.make CMakeFiles/MProjet.dir/src/Modele.cpp.s
+.PHONY : src/Modele.cpp.s
+
 src/Vecteur.o: src/Vecteur.cpp.o
 
 .PHONY : src/Vecteur.o
@@ -273,6 +300,9 @@ help:
 	@echo "... src/Matrice.o"
 	@echo "... src/Matrice.i"
 	@echo "... src/Matrice.s"
+	@echo "... src/Modele.o"
+	@echo "... src/Modele.i"
+	@echo "... src/Modele.s"
 	@echo "... src/Vecteur.o"
 	@echo "... src/Vecteur.i"
 	@echo "... src/Vecteur.s"

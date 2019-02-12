@@ -10,6 +10,7 @@
 #include "Vecteur.h"
 #include "Dessin.h"
 #include "Matrice.h"
+#include "Modele.h"
 #include <chrono>
 #include <cstring>
 
@@ -125,38 +126,13 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     }
 }
 
-vector<TGAImage> chargerTextures(string filename){
-    vector<TGAImage> imgs;
+void chargerTextures(string filename){
     points = readPoint(filename, 0);
     lignes = readLine(filename);
     textures = readPoint(filename, 1);
     intensite = readPoint(filename, 2);
-    TGAImage image1;
-    TGAImage image2;
-    TGAImage image3;
-
-    string name = filename + "_diffuse.tga";
-    string name2 = filename + "_nm.tga";
-    string name3 = filename + "_spec.tga";
-
-    image1.read_tga_file(name.c_str());
-    image1.flip_vertically();
-    image2.read_tga_file(name2.c_str());
-    image2.flip_vertically();
-    image3.read_tga_file(name3.c_str());
-    image3.flip_vertically();
-
-    imgs.push_back(image1);
-    imgs.push_back(image2);
-    imgs.push_back(image3);
-    return imgs;
 }
 
-void cleanTexture(vector<TGAImage> texts){
-    for (TGAImage image : texts){
-        image.clear();
-    }
-}
 
 int main(int ac, char **av) {
     TGAImage image(800, 800, TGAImage::RGB);
@@ -165,13 +141,17 @@ int main(int ac, char **av) {
    zbuffer = new float[width * heigth];
    for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
 
-    imgs = chargerTextures(string(av[1]));
-    afficher(image, imgs[0], imgs[1], imgs[2]);
-    cleanTexture(imgs);
-    imgs.clear();
+   string str = string(av[1]);
+   chargerTextures(str);
+   Modele *modeleAff = new Modele(str);
+   afficher(image, modeleAff->diffuse, modeleAff->nm, modeleAff->spec);
 
-    imgs = chargerTextures(string(av[2]));
-    afficher(image, imgs[0], imgs[1], imgs[2]);
+   str = string(av[2]);
+    chargerTextures(str);
+    Modele *modeleYeux = new Modele(str);
+    afficher(image, modeleYeux->diffuse, modeleYeux->nm, modeleYeux->spec);
+
+    // afficher(image, imgs[0], imgs[1], imgs[2]);
 
 
     image.flip_vertically();
