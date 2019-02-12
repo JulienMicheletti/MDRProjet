@@ -12,6 +12,7 @@
 #include "Matrice.h"
 #include <chrono>
 #include <cstring>
+#include <zconf.h>
 
 vector<vector<string> > points;
 vector<int> lignes;
@@ -19,6 +20,7 @@ vector<vector<std::string> > textures;
 vector<vector<std::string> > intensite;
 using namespace std::chrono;
 Vecteur eye(1,1,3);
+float *zbuffer;
 
 vector<int> readLine(string filename) {
     ifstream fichier(filename.c_str(), ios::in);
@@ -101,7 +103,7 @@ vector<TGAImage> load_texture(char **tab, int ind){
     char *filename;
     for (int i = 1; i < ind; i++) {
         TGAImage image;
-        if (strcmp(tab[i], "african_head") != 0 && strcmp(tab[i], "eye.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
+        if (strcmp(tab[i], "african_head.txt") != 0 && strcmp(tab[i], "eye.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
             filename = tab[i];
             image.read_tga_file(filename);
             image.flip_vertically();
@@ -118,6 +120,7 @@ void load_txt(char * filename){
     ::intensite = readPoint(filename, 2);
 
 }
+
 void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
     vector<pointf> screen;
     Dessin dessin;
@@ -129,7 +132,6 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     Matrice modelView = Matrice::lookat(eye, center, up);
     matrices.matrice_M = Matrice::matrice_M(projection, modelView);
     matrices.matrice_MIT = Matrice::matrice_MIT(matrices.matrice_M);
-    float *zbuffer = new float[width * heigth];
 
     for (int i = 5; i < lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
@@ -153,33 +155,12 @@ int main(int ac, char **av) {
     imgs = load_texture(av, ac);
 
 
+    zbuffer = new float[width * heigth];
+    for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
     load_txt(av[1]);
     afficher(image, imgs[0], imgs[1], imgs[2]);
- /*   load_txt(av[2]);
+    load_txt(av[2]);
     afficher(image, imgs[3], imgs[4], imgs[5]);
-   /* load_txt(av[3]);
-    afficher(image, imgs[6], imgs[7], imgs[8]);*/
-
-  /*  float k = -6;
-    float i = 6.5;
-    while (k <= 6){
-        Vecteur eye2(k, 1, -6);
-        eye = eye2;
-        TGAImage image(800, 800, TGAImage::RGB);
-        afficher(image, imgs[0], imgs[1], imgs[2]);
-        char integer_string[32];
-
-        sprintf(integer_string, "%f", i);
-        char other_string[64] = "output"; // make sure you allocate enough space to append the other string
-        char other_string2[64] = ".tga"; // make sure you allocate enough space to append the other string
-
-        strcat(other_string, integer_string); // other_string now contains "Integer: 1234"
-        strcat(other_string, other_string2);
-        image.flip_vertically();
-        image.write_tga_file(other_string);
-        i+=0.5;
-        k+=0.5;
-    }*/
 
     image.flip_vertically();
     image.write_tga_file("output2.tga");
