@@ -101,7 +101,7 @@ vector<TGAImage> load_texture(char **tab, int ind){
     char *filename;
     for (int i = 1; i < ind; i++) {
         TGAImage image;
-        if (strcmp(tab[i], "african_head.txt") != 0 && strcmp(tab[i], "african_eye_inner.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
+        if (strcmp(tab[i], "african_head") != 0 && strcmp(tab[i], "eye.txt") != 0 && strcmp(tab[i], "african_eye_outer.txt") != 0) {
             filename = tab[i];
             image.read_tga_file(filename);
             image.flip_vertically();
@@ -155,7 +155,7 @@ int main(int ac, char **av) {
 
     load_txt(av[1]);
     afficher(image, imgs[0], imgs[1], imgs[2]);
-/*load_txt(av[2]);
+ /*   load_txt(av[2]);
     afficher(image, imgs[3], imgs[4], imgs[5]);
    /* load_txt(av[3]);
     afficher(image, imgs[6], imgs[7], imgs[8]);*/
