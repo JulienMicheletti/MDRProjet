@@ -13,75 +13,12 @@
 #include "Modele.h"
 #include <chrono>
 #include <cstring>
+#include <curses.h>
 
-vector<vector<string> > points;
-vector<int> lignes;
-vector<vector<std::string> > textures;
-vector<vector<std::string> > intensite;
-Vecteur eye(1, 1, 3);
-using namespace std::chrono;
 float *zbuffer;
+Modele *modele;
 
-vector<int> readLine(string filename) {
-    ifstream fichier(filename.c_str(), ios::in);
-    std::vector<int> tab;
-    if (fichier) {
-        string line;
-        string esp;
-        string token;
-        while (getline(fichier, line)) {
-            if (line[0] == 'f') {
-                std::istringstream iss(line);
-                while (getline(iss, esp, ' ')) {
-                    if (esp[0] != 'f') {
-                        std::istringstream iss2(esp);
-                        for (int i = 0; i < 2; i++) {
-                            getline(iss2, token, '/');
-                            tab.push_back(-1 + atoi((token).c_str()));
-                        }
-                    }
-                }
-            }
-        }
-        fichier.close();
-    } else {
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
-    }
-    return tab;
-}
-
-std::vector<vector<std::string> > readPoint(string filename, int type){
-    ifstream fichier(filename.c_str(), ios::in);
-    std::vector<std::vector<std::string> > tab;
-    std::vector<std::string> tmp;
-    if (fichier){
-        string line;
-        while(getline(fichier, line)){
-            std::istringstream iss(line);
-            std::string token;
-            while(std::getline(iss, token, ' ')){
-                tmp.push_back(token);
-            }
-            if (line[0] == 'v' && line[1] != 't' && type == 0){
-                tab.push_back(tmp);
-            }
-            if (line[0] == 'v' && line[1] == 't' && type == 1){
-                tab.push_back(tmp);
-            }
-            if (line[0] == 'v' && line[1] == 'n' && type == 2){
-                tab.push_back(tmp);
-            }
-            tmp.clear();
-        }
-        fichier.close();
-    }else{
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
-    }
-    return tab;
-}
-
-
-Matrice createCordMatrice(pointf p, Matrice matrice){
+Matrice createCordMatrice(pixel p, Matrice matrice){
     matrice.getMatrice()[0][0] = p.x;
     matrice.getMatrice()[1][0] = p.y;
     matrice.getMatrice()[2][0] = p.z;
@@ -89,19 +26,18 @@ Matrice createCordMatrice(pointf p, Matrice matrice){
     return matrice;
 }
 
-
-pointf m2v (Matrice m){
-    pointf p;
+pixel m2p (Matrice m){
+    pixel p;
     p.x = m.getMatrice()[0][0]/m.getMatrice()[3][0];
     p.y = m.getMatrice()[1][0]/m.getMatrice()[3][0];
     p.z = m.getMatrice()[2][0]/m.getMatrice()[3][0];
     return p;
 }
 
-void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &imagespec) {
-    vector<pointf> screen;
+void afficher(TGAImage &image) {
+    vector<pixel> screen;
     Dessin dessin;
-    pointf p;
+    pixel p;
     matrices matrices;
 
     Matrice vp = Matrice::viewPort(800, 800, 255);
@@ -111,52 +47,41 @@ void afficher(TGAImage &image, TGAImage &imagetga, TGAImage &imagenm, TGAImage &
     matrices.matrice_MIT = Matrice::matrice_MIT(matrices.matrice_M);
 
 
-    for (int i = 5; i < lignes.size(); i += 6) {
+    for (int i = 5; i < modele->lignes.size(); i += 6) {
         for (int j = 5; j >= 0; j -= 2) {
-            p.x = strtof(points[lignes[i - j]][1].c_str(), 0);
-            p.y = strtof(points[lignes[i - j]][2].c_str(), 0);
-            p.z = strtof(points[lignes[i - j]][3].c_str(), 0);
-            p = m2v(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p, matrice)));
-            p.colorX = strtof(textures[lignes[i - j + 1]][2].c_str(), 0);
-            p.colorY = strtof(textures[lignes[i - j + 1]][3].c_str(), 0);
+            p.x = strtof(modele->points[modele->lignes[i - j]][1].c_str(), 0);
+            p.y = strtof(modele->points[modele->lignes[i - j]][2].c_str(), 0);
+            p.z = strtof(modele->points[modele->lignes[i - j]][3].c_str(), 0);
+            p = m2p(vp.multiplier(projection).multiplier(modelView).multiplier(createCordMatrice(p, matrice)));
+            p.colorX = strtof(modele->textures[modele->lignes[i - j + 1]][2].c_str(), 0);
+            p.colorY = strtof(modele->textures[modele->lignes[i - j + 1]][3].c_str(), 0);
             screen.push_back(p);
         }
-        dessin.settriangle(screen, image, zbuffer, imagetga, imagenm, imagespec, matrices);
+        dessin.settriangle(screen, image, zbuffer, modele, matrices);
         screen.clear();
     }
 }
 
-void chargerTextures(string filename){
-    points = readPoint(filename, 0);
-    lignes = readLine(filename);
-    textures = readPoint(filename, 1);
-    intensite = readPoint(filename, 2);
-}
-
-
 int main(int ac, char **av) {
     TGAImage image(800, 800, TGAImage::RGB);
-    vector <TGAImage> imgs;
+    TGAColor grey(192,192,192);
+    for (int i = 0; i < width; i++){
+        for (int j = 0; j < heigth; j++){
+            image.set(i, j, grey);
+        }
+    }
 
    zbuffer = new float[width * heigth];
    for (int i=width*heigth; i--; zbuffer[i] = -std::numeric_limits<float>::max());
+       for (int i = 1; i < ac; i++) {
+           string name = string(av[i]);
+           modele = new Modele(name, false);
+           afficher(image);
+       }
 
-   string str = string(av[1]);
-   chargerTextures(str);
-   Modele *modeleAff = new Modele(str);
-   afficher(image, modeleAff->diffuse, modeleAff->nm, modeleAff->spec);
-
-   str = string(av[2]);
-    chargerTextures(str);
-    Modele *modeleYeux = new Modele(str);
-    afficher(image, modeleYeux->diffuse, modeleYeux->nm, modeleYeux->spec);
-
-    // afficher(image, imgs[0], imgs[1], imgs[2]);
-
-
-    image.flip_vertically();
-    image.write_tga_file("output2.tga");
-    delete [] zbuffer;
+       image.flip_vertically();
+       image.write_tga_file("african.tga");
+       delete[] zbuffer;
 
     return 0;
 }

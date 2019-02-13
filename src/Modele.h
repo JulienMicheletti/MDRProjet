@@ -7,16 +7,25 @@
 
 
 #include "tgaimage.h"
-#include "Dessin.h"
+
+
+using namespace std;
 
 class Modele {
 public:
     TGAImage diffuse;
     TGAImage nm;
     TGAImage spec;
+    TGAImage glow;
+    vector<vector<string> > points;
+    vector<int> lignes;
+    vector<vector<std::string> > textures;
+    bool glowing;
 
     Modele();
-    Modele(string filename);
+    Modele(string filename, bool glowing);
+    vector<vector<std::string> > readPoint(string filename, int type);
+    vector<int> readLine(string filename);
 };
 
 

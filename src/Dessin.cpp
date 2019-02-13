@@ -4,14 +4,10 @@
 
 #include "Dessin.h"
 
-Vecteur n;
-Vecteur l;
-float diff;
-float specf;
 
 Dessin::Dessin(){}
 
-Vecteur Dessin::barycentrique(pointf p, pointf p1, pointf p2, pointf p3){
+Vecteur Dessin::barycentrique(pixel p, pixel p1, pixel p2, pixel p3){
     Vecteur w;
 
     w.x = (p2.y - p3.y)*(p.x - p3.x) + (p3.x - p2.x)*(p.y - p3.y);
@@ -32,10 +28,10 @@ bool Dessin::isInTriangle(Vecteur vecteur)
     return true;
 }
 
-vector<pointf> Dessin::findbox(pointf pt1, pointf pt2, pointf pt3){
-    vector<pointf> box;
-    pointf min;
-    pointf max;
+vector<pixel> Dessin::findbox(pixel pt1, pixel pt2, pixel pt3){
+    vector<pixel> box;
+    pixel min;
+    pixel max;
     max.x = pt1.x > pt2.x ? (pt1.x > pt3.x ? pt1.x : pt3.x) : (pt2.x > pt3.x ? pt2.x : pt3.x);
     max.y = pt1.y > pt2.y ? (pt1.y > pt3.y ? pt1.y : pt3.y) : (pt2.y > pt3.y ? pt2.y : pt3.y);
     min.x = pt1.x < pt2.x ? (pt1.x < pt3.x ? pt1.x : pt3.x) : (pt2.x < pt3.x ? pt2.x : pt3.x);
@@ -48,7 +44,7 @@ vector<pointf> Dessin::findbox(pointf pt1, pointf pt2, pointf pt3){
 
 }
 
-TGAColor Dessin::interpolateTriangle(Vecteur v, pointf p1, pointf p2, pointf p3, TGAImage &image, pointf newPt){
+TGAColor Dessin::interpolateTriangle(Vecteur v, pixel p1, pixel p2, pixel p3, TGAImage &image, pixel newPt){
     TGAColor color;
 
     newPt.colorX = (p1.colorX * v.x + p2.colorX * v.y + p3.colorX * v.z)*image.get_width();
@@ -67,7 +63,7 @@ Vecteur Dessin::matriceTovecteur(Matrice m){
 }
 
 
-float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
+float Dessin::interpolateIntensite(pixel newPt, matrices matrice){
     Vecteur normal(newPt.colorN.bgra[2], newPt.colorN.bgra[1], newPt.colorN.bgra[0]);
     Matrice m(4,4);
     normal = Vecteur::convertirRGB(normal);
@@ -84,7 +80,7 @@ float Dessin::interpolateIntensite(pointf newPt, matrices matrice){
     return  max(n.produitScal(l), 0.0f);
 }
 
-void Dessin::interpolateSpec(pointf newPt) {
+void Dessin::interpolateSpec(pixel newPt) {
     Vecteur spec(newPt.colorSpec.bgra[2], newPt.colorSpec.bgra[1], newPt.colorSpec.bgra[0]);
     float scal = n.produitScal(l) * 2.f;
     Vecteur r = n.mult(scal);
@@ -94,19 +90,17 @@ void Dessin::interpolateSpec(pointf newPt) {
 }
 
 
-TGAColor Dessin::convertirIntensite(pointf pixel){
+TGAColor Dessin::convertirIntensite(pixel pixel){
     TGAColor color = pixel.color;
     TGAColor newColor((float)color.bgra[2] * pixel.intensite, (float)color.bgra[1]* pixel.intensite, (float)color.bgra[0]* pixel.intensite, 255);
     return newColor;
 }
 
-
-void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer, TGAImage &tgaImage, TGAImage &imageDiffuse, TGAImage &imageSpec, matrices matrices) {
-
-    vector <pointf> box = findbox(screen[0], screen[1], screen[2]);
+void Dessin::settriangle(vector<pixel> screen, TGAImage &image, float *zbuffer, Modele *modele, matrices matrices) {
+    vector <pixel> box = findbox(screen[0], screen[1], screen[2]);
     Vecteur v;
     float z;
-    pointf newPt;
+    pixel newPt;
 
     for (int i = box[1].x; i < box[0].x; i++){
         for (int j = box[1].y; j < box[0].y; j++) {
@@ -117,15 +111,17 @@ void Dessin::settriangle(vector<pointf> screen, TGAImage &image, float *zbuffer,
                 newPt.z = screen[0].z * v.x + screen[1].z * v.y + screen[2].z * v.z ;
                 if (int(newPt.x + newPt.y * width) > 0 && zbuffer[int(newPt.x + newPt.y * width)] < newPt.z) {
                     zbuffer[int(newPt.x + newPt.y * width)] = newPt.z;
-                    newPt.color = interpolateTriangle(v, screen[0], screen[1], screen[2], tgaImage, newPt);
-                    newPt.colorN = interpolateTriangle(v, screen[0], screen[1], screen[2], imageDiffuse, newPt);
-                    newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], imageSpec, newPt);
+                    newPt.color = interpolateTriangle(v, screen[0], screen[1], screen[2], modele->diffuse, newPt);
+                    newPt.colorN = interpolateTriangle(v, screen[0], screen[1], screen[2], modele->nm, newPt);
+                    newPt.colorSpec = interpolateTriangle(v, screen[0], screen[1], screen[2], modele->spec, newPt);
+                    if (modele->glowing)
+                        newPt.colorGlow =  interpolateTriangle(v, screen[0], screen[1], screen[2], modele->glow, newPt);
                     newPt.intensite = interpolateIntensite(newPt, matrices);
                     interpolateSpec(newPt);
                     TGAColor color = convertirIntensite(newPt);
                     newPt.color = color;
                     for (int i = 0; i < 3; i++) {
-                        newPt.color[i] = std::min<float>(5 + color[i] * (diff + .6 * specf), 255);
+                        newPt.color[i] = std::min<float>(5 + color[i] * (diff + .6 * specf + 0.30*newPt.colorGlow[i]), 255);
                     }
                     image.set(newPt.x, newPt.y, newPt.color);
                 }
